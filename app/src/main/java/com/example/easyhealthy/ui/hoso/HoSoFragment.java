@@ -1,4 +1,4 @@
-package com.example.easyhealthy.ui.dashboard;
+package com.example.easyhealthy.ui.hoso;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.easyhealthy.databinding.FragmentDashboardBinding;
+import com.example.easyhealthy.databinding.FragmentHosoBinding;
 
-public class DashboardFragment extends Fragment {
+public class HoSoFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private FragmentHosoBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        HoSoViewModel notificationsViewModel =
+                new ViewModelProvider(this).get(HoSoViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentHosoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textNotifications;
+        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

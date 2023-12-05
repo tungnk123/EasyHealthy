@@ -6,20 +6,25 @@
     app:startDestination="@+id/navigation_home">
 
     <fragment
+        android:id="@+id/navigation_baiBao"
+        android:name="com.example.easyhealthy.ui.baibao.BaiBaoFragment"
+        android:label="@string/title_baibao"
+        tools:layout="@layout/fragment_baibao" />
+    <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.easyhealthy.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.easyhealthy.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_duyet"
+        android:name="com.example.easyhealthy.ui.abc.duyet.DuyetFragment"
+        android:label="@string/title_duyet"
+        tools:layout="@layout/fragment_duyet" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.easyhealthy.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_hoso"
+        android:name="com.example.easyhealthy.ui.hoso.HoSoFragment"
+        android:label="@string/title_hoso"
+        tools:layout="@layout/fragment_hoso" />
 </navigation>

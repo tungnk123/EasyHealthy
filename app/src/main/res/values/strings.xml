@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">EasyHealthy</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">Tóm tắt</string>
+    <string name="title_duyet">Duyệt</string>
+    <string name="title_hoso">Hồ sơ</string>
+    <string name="title_duyetpage">Danh mục sức khỏe</string>
+    <string name="title_baibao">Bài báo</string>
 </resources>
