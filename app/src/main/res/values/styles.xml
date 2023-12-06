@@ -38,6 +38,12 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="list_item" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name="small_text" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">12sp</item>
