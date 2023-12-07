@@ -1,21 +1,26 @@
-package com.example.easyhealthy.ui.abc.duyet;
+package com.example.easyhealthy.ui.duyet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.easyhealthy.MainActivity;
 import com.example.easyhealthy.R;
 import com.example.easyhealthy.adapter.ListAdapter;
 import com.example.easyhealthy.databinding.FragmentDuyetBinding;
 import com.example.easyhealthy.model.DuyetItem;
+import com.example.easyhealthy.ui.dinhDuong.DinhDuongActivity;
+
+import java.util.Objects;
 
 public class DuyetFragment extends Fragment {
 
@@ -41,6 +46,16 @@ public class DuyetFragment extends Fragment {
 
         };
         ListAdapter listAdapter = new ListAdapter(dataSet);
+        listAdapter.setOnItemClickListener(new ListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DuyetItem item) {
+                Toast.makeText(requireContext(), "Clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                if (Objects.equals(item.getTitle(), "Dinh dưỡng")) {
+                    Intent intent = new Intent(getContext(), DinhDuongActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
         rcvListItem.setAdapter(listAdapter);
         rcvListItem.setLayoutManager(new LinearLayoutManager(requireContext()));
 

@@ -15,6 +15,13 @@ import com.example.easyhealthy.model.DuyetItem;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListItemHolder> {
     private final DuyetItem[] localDataSet;
+    private OnItemClickListener mListener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
+
 
     public ListAdapter(DuyetItem[] dataSet) {
         localDataSet = dataSet;
@@ -32,6 +39,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListItemHolder
     public void onBindViewHolder(@NonNull ListItemHolder holder, int position) {
         holder.textView.setText(localDataSet[position].getTitle());
         holder.imageView.setImageResource(localDataSet[position].getIcon());
+        holder.itemView.setOnClickListener(v -> {
+            if (mListener != null) {
+                mListener.onItemClick(localDataSet[position]);
+            }
+        });
     }
 
     @Override
@@ -52,6 +64,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListItemHolder
         public TextView getTextView() {
             return textView;
         }
+    }
+    public interface OnItemClickListener {
+        void onItemClick(DuyetItem item);
     }
 
 }

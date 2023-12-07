@@ -1,4 +1,4 @@
-package com.example.easyhealthy.ui.abc.duyet;
+package com.example.easyhealthy.ui.duyet;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
