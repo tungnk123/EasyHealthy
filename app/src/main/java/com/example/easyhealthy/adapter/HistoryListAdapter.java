@@ -1,6 +1,5 @@
 package com.example.easyhealthy.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.easyhealthy.R;
 import com.example.easyhealthy.model.DuyetItem;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListItemHolder> {
+public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.ListItemHolder> {
     private final DuyetItem[] localDataSet;
     private OnItemClickListener mListener;
 
@@ -23,14 +22,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListItemHolder
 
 
 
-    public ListAdapter(DuyetItem[] dataSet) {
+    public HistoryListAdapter(DuyetItem[] dataSet) {
         localDataSet = dataSet;
     }
     @NonNull
     @Override
     public ListItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item, parent, false);
+                .inflate(R.layout.history_list_item, parent, false);
 
         return new ListItemHolder(view);
     }

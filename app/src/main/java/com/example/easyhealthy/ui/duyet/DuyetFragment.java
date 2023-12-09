@@ -13,9 +13,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.easyhealthy.MainActivity;
 import com.example.easyhealthy.R;
-import com.example.easyhealthy.adapter.ListAdapter;
+import com.example.easyhealthy.adapter.ListWithImageAdapter;
 import com.example.easyhealthy.databinding.FragmentDuyetBinding;
 import com.example.easyhealthy.model.DuyetItem;
 import com.example.easyhealthy.ui.dinhDuong.DinhDuongActivity;
@@ -45,8 +44,8 @@ public class DuyetFragment extends Fragment {
                 new DuyetItem("Số đo cơ thể", R.drawable.ic_body),
 
         };
-        ListAdapter listAdapter = new ListAdapter(dataSet);
-        listAdapter.setOnItemClickListener(new ListAdapter.OnItemClickListener() {
+        ListWithImageAdapter listAdapter = new ListWithImageAdapter(dataSet);
+        listAdapter.setOnItemClickListener(new ListWithImageAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DuyetItem item) {
                 Toast.makeText(requireContext(), "Clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();

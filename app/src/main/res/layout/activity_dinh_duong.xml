@@ -48,13 +48,12 @@
             app:layout_constraintTop_toBottomOf="@+id/tb_dinhDuong" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_dinhDuongRcv"
+            android:id="@+id/rcv_dinhDuong_history"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
-            android:background="@drawable/background_rounded"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_historyTitle" />
@@ -68,12 +67,12 @@
             android:layout_marginTop="30dp"
             android:text="Không có dữ liệu"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rcv_dinhDuongRcv" />
+            app:layout_constraintTop_toBottomOf="@+id/rcv_dinhDuong_history" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_dinhDuong_noResultRcv"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
