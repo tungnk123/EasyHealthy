@@ -12,7 +12,7 @@ import com.example.easyhealthy.R;
 import com.example.easyhealthy.adapter.HistoryListAdapter;
 import com.example.easyhealthy.adapter.ListWithNoImageAdapter;
 import com.example.easyhealthy.model.DuyetItem;
-import com.example.easyhealthy.ui.nutrition.DetailedNutrition;
+import com.example.easyhealthy.ui.nutrition.DetailedNutritionActivity;
 
 public class DinhDuongActivity extends AppCompatActivity {
 
@@ -74,7 +74,7 @@ public class DinhDuongActivity extends AppCompatActivity {
             @Override
             public void onItemClick(String item) {
                 if (item.equals("Canxi")) {
-                    startActivity(new Intent(getApplicationContext(), DetailedNutrition.class));
+                    startActivity(new Intent(getApplicationContext(), DetailedNutritionActivity.class));
                 }
                 else {
                     // Them cac loai dinh duong khac o day
