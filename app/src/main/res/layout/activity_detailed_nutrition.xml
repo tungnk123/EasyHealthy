@@ -114,6 +114,14 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_detailedNutrition_heading2" />
 
         <!-- Day la cho de bar chart-->
+        <com.github.mikephil.charting.charts.BarChart
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/chart"
+            android:background="@drawable/background_rounded"
+            app:layout_constraintTop_toBottomOf="@+id/tv_detailedNutrition_trungBinh"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -134,7 +142,7 @@
             android:layout_marginTop="10dp"
             android:text="Giới thiệu về canxi"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_detailedNutrition_trungBinh" />
+            app:layout_constraintTop_toBottomOf="@+id/chart" />
 
         <TextView
             android:id="@+id/tv_detailedNutrition_noiDungGioiThieu"
