@@ -14,4 +14,6 @@
     <color name="pink_200">#EEA4CE</color>
     <color name="gray_500">#ADA4A5</color>
     <color name="gray_200">#DDDADA</color>
+    <color name="green_200">#71EA66</color>
+    <color name="border_color">#F7F8F8</color>
 </resources>

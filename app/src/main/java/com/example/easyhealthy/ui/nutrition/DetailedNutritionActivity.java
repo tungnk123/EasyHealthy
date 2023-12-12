@@ -6,19 +6,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.easyhealthy.R;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class DetailedNutritionActivity extends AppCompatActivity {
 
     Button btnThemDuLieu;
+    Button btnNgay;
     BarChart barChart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,21 +38,28 @@ public class DetailedNutritionActivity extends AppCompatActivity {
 
 
     private void addControls() {
-
+        btnNgay = (Button) findViewById(R.id.btn_ngay);
         btnThemDuLieu = (Button) findViewById(R.id.btn_themDuLieu);
         barChart = findViewById(R.id.chart);
 
         ArrayList<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(0, 45f));
-        entries.add(new BarEntry(0, 65f));
-        entries.add(new BarEntry(0, 75f));
-        entries.add(new BarEntry(0, 85f));
-        entries.add(new BarEntry(0, 105f));
+        entries.add(new BarEntry(1, 2));
+        entries.add(new BarEntry(6, 3));
+        entries.add(new BarEntry(10, 4));
+        entries.add(new BarEntry(14, 5));
+        entries.add(new BarEntry(18, 7));
 
-        BarDataSet dataSet = new BarDataSet(entries, "Subjects");
-        dataSet.setColor(R.color.purple_500);
+        BarDataSet dataSet = new BarDataSet(entries, "Canxi");
+        dataSet.setColors(ColorTemplate.rgb("71EA66"));
         BarData barData = new BarData(dataSet);
         barChart.setData(barData);
+        barChart.setFitBars(true);
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setAxisMinimum(0);
+        xAxis.setAxisMaximum(24);
+        barChart.animateXY(2000, 2000);
+        barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        barChart.getDescription().setText("Lưu lượng canxi trong ngày");
     }
 
     private void addEvents() {
@@ -52,6 +67,13 @@ public class DetailedNutritionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), AddNutritionDataActivity.class));
+            }
+        });
+        btnNgay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnNgay.setBackgroundColor(getResources().getColor(R.color.green_200));
+                Toast.makeText(getApplicationContext(), "button ngay click", Toast.LENGTH_LONG).show();
             }
         });
     }
