@@ -35,20 +35,19 @@
                     android:text="Dinh dưỡng" />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
-
         <TextView
-            android:id="@+id/tv_historyTitle"
+            android:id="@+id/tv_currentFood"
             style="@style/heading3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
-            android:text="7 ngày qua"
+            android:text="Danh sách thức ăn hiện có"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tb_dinhDuong" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_dinhDuong_history"
+            android:id="@+id/rcv_dinhDuong_currentFood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -56,7 +55,50 @@
             android:layout_marginEnd="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_historyTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_currentFood" />
+
+        <TextView
+            android:id="@+id/tv_historyFood"
+            style="@style/heading3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:text="Lịch sử ăn uống"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rcv_dinhDuong_currentFood" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_dinhDuong_historyFood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_historyFood" />
+        <TextView
+            android:id="@+id/tv_historyNutrition"
+            style="@style/heading3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:text="Lịch sử dinh dưỡng"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rcv_dinhDuong_historyFood" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_dinhDuong_historyNutrition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_historyNutrition" />
 
         <TextView
             android:id="@+id/tv_dinhDuong_noResultTitle"
@@ -67,7 +109,7 @@
             android:layout_marginTop="30dp"
             android:text="Không có dữ liệu"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rcv_dinhDuong_history" />
+            app:layout_constraintTop_toBottomOf="@+id/rcv_dinhDuong_historyNutrition" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_dinhDuong_noResultRcv"
