@@ -3,6 +3,7 @@ package com.example.easyhealthy.ui.nutrition;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,9 @@ public class DetailedNutritionActivity extends AppCompatActivity {
 
     Button btnThemDuLieu;
     Button btnNgay;
+    Button btnTuan;
+    Button btnThang;
+    Button btnNam;
     BarChart barChart;
 
     @Override
@@ -39,6 +43,9 @@ public class DetailedNutritionActivity extends AppCompatActivity {
 
     private void addControls() {
         btnNgay = (Button) findViewById(R.id.btn_ngay);
+        btnTuan = (Button) findViewById(R.id.btn_tuan);
+        btnThang = (Button) findViewById(R.id.btn_thang);
+        btnNam = (Button) findViewById(R.id.btn_nam);
         btnThemDuLieu = (Button) findViewById(R.id.btn_themDuLieu);
         barChart = findViewById(R.id.chart);
 
@@ -72,8 +79,52 @@ public class DetailedNutritionActivity extends AppCompatActivity {
         btnNgay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnNgay.setBackgroundColor(getResources().getColor(R.color.green_200));
+                Drawable drawableSelected = getResources().getDrawable(R.drawable.background_rounded_selected_button, getTheme());
+                btnNgay.setBackground(drawableSelected);
+                Drawable drawableNotSelected = getResources().getDrawable(R.drawable.background_rounded_transparent, getTheme());
+                btnTuan.setBackground(drawableNotSelected);
+                btnThang.setBackground(drawableNotSelected);
+                btnNam.setBackground(drawableNotSelected);
                 Toast.makeText(getApplicationContext(), "button ngay click", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        btnTuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Drawable drawableSelected = getResources().getDrawable(R.drawable.background_rounded_selected_button, getTheme());
+                btnTuan.setBackground(drawableSelected);
+                Drawable drawableNotSelected = getResources().getDrawable(R.drawable.background_rounded_transparent, getTheme());
+                btnNgay.setBackground(drawableNotSelected);
+                btnThang.setBackground(drawableNotSelected);
+                btnNam.setBackground(drawableNotSelected);
+                Toast.makeText(getApplicationContext(), "button tuan click", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        btnThang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Drawable drawableSelected = getResources().getDrawable(R.drawable.background_rounded_selected_button, getTheme());
+                btnThang.setBackground(drawableSelected);
+                Drawable drawableNotSelected = getResources().getDrawable(R.drawable.background_rounded_transparent, getTheme());
+                btnNgay.setBackground(drawableNotSelected);
+                btnTuan.setBackground(drawableNotSelected);
+                btnNam.setBackground(drawableNotSelected);
+                Toast.makeText(getApplicationContext(), "button thang click", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        btnNam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Drawable drawableSelected = getResources().getDrawable(R.drawable.background_rounded_selected_button, getTheme());
+                btnNam.setBackground(drawableSelected);
+                Drawable drawableNotSelected = getResources().getDrawable(R.drawable.background_rounded_transparent, getTheme());
+                btnNgay.setBackground(drawableNotSelected);
+                btnThang.setBackground(drawableNotSelected);
+                btnTuan.setBackground(drawableNotSelected);
+                Toast.makeText(getApplicationContext(), "button nam click", Toast.LENGTH_LONG).show();
             }
         });
     }

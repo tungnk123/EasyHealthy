@@ -73,21 +73,18 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_tuan"
-                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="Tuần"
-                android:background="@drawable/background_rounded_selected_button"
+                android:background="@drawable/background_rounded_transparent"
                 android:textColor="@color/black"
-                android:textSize="11sp"
-                app:iconTint="#303F9F" />
+                android:textSize="11sp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_thang"
                 android:text="Tháng"
-                style="?android:attr/buttonBarButtonStyle"
                 android:background="@drawable/background_rounded_transparent"
                 android:textColor="@color/black"
                 android:textSize="11sp" />
@@ -97,7 +94,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_nam"
                 android:text="Năm"
-                style="?android:attr/buttonBarButtonStyle"
                 android:background="@drawable/background_rounded_transparent"
                 android:textColor="@color/black"
                 android:textSize="11sp" />
@@ -121,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:text="100"
-            android:textSize="50dp"
+            android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_detailedNutrition_heading2" />
 
@@ -142,7 +138,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="44dp"
             android:text="mg"
-            android:textSize="25sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_detailedNutrition_trungBinh"
             app:layout_constraintStart_toEndOf="@+id/tv_detailedNutrition_heading2"
             app:layout_constraintTop_toTopOf="@+id/tv_detailedNutrition_trungBinh" />
