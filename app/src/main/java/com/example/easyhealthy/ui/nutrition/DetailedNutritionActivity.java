@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.easyhealthy.R;
@@ -17,6 +18,8 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +33,8 @@ public class DetailedNutritionActivity extends AppCompatActivity {
     Button btnThang;
     Button btnNam;
     BarChart barChart;
+    TextView tvHeading2;
+    TextView tvTrungBinh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +72,10 @@ public class DetailedNutritionActivity extends AppCompatActivity {
         barChart.animateXY(2000, 2000);
         barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         barChart.getDescription().setText("Lưu lượng canxi trong ngày");
+
+
+        tvHeading2 = (TextView) findViewById(R.id.tv_detailedNutrition_heading2);
+        tvTrungBinh = (TextView) findViewById(R.id.tv_detailedNutrition_trungBinh);
     }
 
     private void addEvents() {
@@ -86,6 +95,8 @@ public class DetailedNutritionActivity extends AppCompatActivity {
                 btnThang.setBackground(drawableNotSelected);
                 btnNam.setBackground(drawableNotSelected);
                 Toast.makeText(getApplicationContext(), "button ngay click", Toast.LENGTH_LONG).show();
+                updateUI("ngay");
+                updateDataForChart("ngay");
             }
         });
 
@@ -99,6 +110,8 @@ public class DetailedNutritionActivity extends AppCompatActivity {
                 btnThang.setBackground(drawableNotSelected);
                 btnNam.setBackground(drawableNotSelected);
                 Toast.makeText(getApplicationContext(), "button tuan click", Toast.LENGTH_LONG).show();
+                updateUI("tuan");
+                updateDataForChart("tuan");
             }
         });
 
@@ -112,6 +125,8 @@ public class DetailedNutritionActivity extends AppCompatActivity {
                 btnTuan.setBackground(drawableNotSelected);
                 btnNam.setBackground(drawableNotSelected);
                 Toast.makeText(getApplicationContext(), "button thang click", Toast.LENGTH_LONG).show();
+                updateUI("thang");
+                updateDataForChart("thang");
             }
         });
 
@@ -125,7 +140,111 @@ public class DetailedNutritionActivity extends AppCompatActivity {
                 btnThang.setBackground(drawableNotSelected);
                 btnTuan.setBackground(drawableNotSelected);
                 Toast.makeText(getApplicationContext(), "button nam click", Toast.LENGTH_LONG).show();
+                updateUI("nam");
+                updateDataForChart("nam");
             }
         });
+    }
+
+    private void updateDataForChart(String type) {
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        BarDataSet dataSet = new BarDataSet(entries, "Canxi");
+        BarData barData = new BarData(dataSet);
+        XAxis xAxis = barChart.getXAxis();
+        switch (type) {
+            case "ngay":
+
+                entries.add(new BarEntry(1, 2));
+                entries.add(new BarEntry(6, 3));
+                entries.add(new BarEntry(10, 4));
+                entries.add(new BarEntry(14, 5));
+                entries.add(new BarEntry(18, 7));
+
+
+                dataSet.setColors(ColorTemplate.rgb("71EA66"));
+
+                barChart.setData(barData);
+                barChart.setFitBars(true);
+                xAxis = barChart.getXAxis();
+                xAxis.setAxisMinimum(0);
+                xAxis.setAxisMaximum(24);
+                barChart.animateXY(2000, 2000);
+                barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+                barChart.getDescription().setText("Lưu lượng canxi trong ngày");
+                break;
+            case "tuan":
+                entries = new ArrayList<>();
+                entries.add(new BarEntry(1, 2));
+                entries.add(new BarEntry(2, 3));
+                entries.add(new BarEntry(3, 4));
+                entries.add(new BarEntry(6, 5));
+                entries.add(new BarEntry(7, 7));
+
+                dataSet = new BarDataSet(entries, "Canxi");
+                dataSet.setColors(ColorTemplate.rgb("71EA66"));
+                barData = new BarData(dataSet);
+                barChart.setData(barData);
+                barChart.setFitBars(true);
+
+                xAxis.setAxisMinimum(0);
+                xAxis.setAxisMaximum(7);
+                barChart.animateXY(2000, 2000);
+                barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+                barChart.getDescription().setText("Lưu lượng canxi trong tuần");
+                break;
+            case "thang":
+                entries = new ArrayList<>();
+                entries.add(new BarEntry(1, 2));
+                entries.add(new BarEntry(8, 3));
+                entries.add(new BarEntry(18, 4));
+                entries.add(new BarEntry(25, 5));
+                entries.add(new BarEntry(28, 7));
+
+                dataSet = new BarDataSet(entries, "Canxi");
+                dataSet.setColors(ColorTemplate.rgb("71EA66"));
+                barData = new BarData(dataSet);
+                barChart.setData(barData);
+                barChart.setFitBars(true);
+
+                xAxis.setAxisMinimum(0);
+                xAxis.setAxisMaximum(31);
+                barChart.animateXY(2000, 2000);
+                barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+                barChart.getDescription().setText("Lưu lượng canxi trong tháng");
+                break;
+            case "nam":
+                entries = new ArrayList<>();
+                entries.add(new BarEntry(1, 2));
+                entries.add(new BarEntry(3, 3));
+                entries.add(new BarEntry(4, 4));
+                entries.add(new BarEntry(6, 5));
+                entries.add(new BarEntry(10, 7));
+
+                dataSet = new BarDataSet(entries, "Canxi");
+                dataSet.setColors(ColorTemplate.rgb("71EA66"));
+                barData = new BarData(dataSet);
+                barChart.setData(barData);
+                barChart.setFitBars(true);
+
+                xAxis.setAxisMinimum(0);
+                xAxis.setAxisMaximum(12);
+                barChart.animateXY(2000, 2000);
+                barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+                barChart.getDescription().setText("Lưu lượng canxi trong năm");
+                break;
+
+        }
+    }
+
+    private void updateUI(String type) {
+        if (type == "tuan" || type == "thang") {
+            tvHeading2.setText("Trung bình mỗi ngày");
+        }
+        else if (type == "nam") {
+            tvHeading2.setText("Trung bình");
+        }
+        else {
+            tvHeading2.setText("Tổng");
+        }
     }
 }
