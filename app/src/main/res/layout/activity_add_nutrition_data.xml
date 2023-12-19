@@ -37,6 +37,7 @@
             android:layout_gravity="end"
             android:background="@android:color/transparent"
             android:text="Thêm"
+            android:id="@+id/btn_addDetailNutrition"
             android:textColor="@color/blue_300"
             android:textSize="12sp" />
     </androidx.appcompat.widget.Toolbar>
@@ -70,20 +71,53 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_addNutritionData_ngay"
             android:layout_marginTop="20dp"
             style="@style/list_item"
-            android:layout_marginStart="20dp"
-            />
+            android:layout_marginStart="20dp" />
+
         <TextView
+            android:id="@+id/tv_addNutritionData_data"
+            style="@style/list_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="mg"
-            android:id="@+id/tv_addNutritionData_data"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_addNutritionData_gio"
-            android:layout_marginTop="20dp"
-            style="@style/list_item"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="20dp"
             android:layout_marginStart="20dp"
-            />
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="mg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_addNutritionData_gio" />
+
+        <TextView
+            android:id="@+id/tv_addNutritionData_ngayTimePicker"
+            style="@style/small_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:text="1/1/2023"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_addNutritionData_ngay" />
+
+        <TextView
+            android:id="@+id/tv_addNutritionData_gioTimePicker"
+            style="@style/small_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:text="12:21"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_addNutritionData_gio" />
+
+        <EditText
+            android:id="@+id/edt_luuLuong"
+            style="@style/small_text"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center"
+            android:hint="Nhập mg"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_addNutritionData_data" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
