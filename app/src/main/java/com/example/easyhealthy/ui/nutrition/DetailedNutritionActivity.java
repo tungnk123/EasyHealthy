@@ -1,16 +1,20 @@
 package com.example.easyhealthy.ui.nutrition;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.easyhealthy.R;
+import com.example.easyhealthy.model.NutritionData;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -18,12 +22,20 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import org.w3c.dom.Text;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class DetailedNutritionActivity extends AppCompatActivity {
 
@@ -55,11 +67,11 @@ public class DetailedNutritionActivity extends AppCompatActivity {
         barChart = findViewById(R.id.chart);
 
         ArrayList<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(1, 2));
-        entries.add(new BarEntry(6, 3));
-        entries.add(new BarEntry(10, 4));
-        entries.add(new BarEntry(14, 5));
-        entries.add(new BarEntry(18, 7));
+//        entries.add(new BarEntry(1, 2));
+//        entries.add(new BarEntry(6, 3));
+//        entries.add(new BarEntry(10, 4));
+//        entries.add(new BarEntry(14, 5));
+//        entries.add(new BarEntry(18, 7));
 
         BarDataSet dataSet = new BarDataSet(entries, "Canxi");
         dataSet.setColors(ColorTemplate.rgb("71EA66"));
@@ -147,101 +159,148 @@ public class DetailedNutritionActivity extends AppCompatActivity {
     }
 
     private void updateDataForChart(String type) {
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        String collectionPath = "Canxi";
+
+        CollectionReference collectionReference = firestore.collection(collectionPath);
         ArrayList<BarEntry> entries = new ArrayList<>();
         BarDataSet dataSet = new BarDataSet(entries, "Canxi");
         BarData barData = new BarData(dataSet);
         XAxis xAxis = barChart.getXAxis();
+
         switch (type) {
-            case "ngay":
+                    case "ngay":
+                        // Get the current time
+                        Calendar calendar = Calendar.getInstance();
+                        long currentTime = calendar.getTimeInMillis();
 
-                entries.add(new BarEntry(1, 2));
-                entries.add(new BarEntry(6, 3));
-                entries.add(new BarEntry(10, 4));
-                entries.add(new BarEntry(14, 5));
-                entries.add(new BarEntry(18, 7));
+                        calendar.set(Calendar.HOUR_OF_DAY, 0);
+                        calendar.set(Calendar.MINUTE, 0);
+                        calendar.set(Calendar.SECOND, 0);
+                        calendar.set(Calendar.MILLISECOND, 0);
+                        long startOfDayTimestamp = calendar.getTimeInMillis();
+                        collectionReference
+                                .whereGreaterThanOrEqualTo("date", new Date(startOfDayTimestamp))
+                                .whereLessThanOrEqualTo("date", new Date(currentTime))
+                                .get()
+                                .addOnSuccessListener(queryDocumentSnapshots -> {
+                                    // Handle the retrieved documents
+                                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                        NutritionData nutritionData = new NutritionData(documentSnapshot);
+                                        entries.add(new BarEntry(Integer.parseInt(nutritionData.getTime().substring(0, 2)), nutritionData.getQuantity()));
+                                        Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
+                                    }
+                                    updateChart(entries, xAxis, "Lưu lượng canxi trong ngày", "ngay");
+                                })
+                                .addOnFailureListener(e -> Log.e("1", "Error fetching tuan data: " + e.getMessage()));
+                        break;
 
-
-                dataSet.setColors(ColorTemplate.rgb("71EA66"));
-
-                barChart.setData(barData);
-                barChart.setFitBars(true);
-                xAxis = barChart.getXAxis();
-                xAxis.setAxisMinimum(0);
-                xAxis.setAxisMaximum(24);
-                barChart.animateXY(2000, 2000);
-                barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-                barChart.getDescription().setText("Lưu lượng canxi trong ngày");
-                break;
             case "tuan":
-                entries = new ArrayList<>();
-                entries.add(new BarEntry(1, 2));
-                entries.add(new BarEntry(2, 3));
-                entries.add(new BarEntry(3, 4));
-                entries.add(new BarEntry(6, 5));
-                entries.add(new BarEntry(7, 7));
+                calendar = Calendar.getInstance();
+                currentTime = calendar.getTimeInMillis();
+                calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());
+                long startOfWeekTimestamp = calendar.getTimeInMillis();
 
-                dataSet = new BarDataSet(entries, "Canxi");
-                dataSet.setColors(ColorTemplate.rgb("71EA66"));
-                barData = new BarData(dataSet);
-                barChart.setData(barData);
-                barChart.setFitBars(true);
-
-                xAxis.setAxisMinimum(0);
-                xAxis.setAxisMaximum(7);
-                barChart.animateXY(2000, 2000);
-                barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-                barChart.getDescription().setText("Lưu lượng canxi trong tuần");
+                collectionReference
+                        .whereGreaterThanOrEqualTo("date", new Date(startOfWeekTimestamp))
+                        .whereLessThanOrEqualTo("date", new Date(currentTime))
+                        .get()
+                        .addOnSuccessListener(queryDocumentSnapshots -> {
+                            // Handle the retrieved documents
+                            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                NutritionData nutritionData = new NutritionData(documentSnapshot);
+                                entries.add(new BarEntry(nutritionData.getDate().getDay(), nutritionData.getQuantity()));
+                                Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
+                            }
+                            updateChart(entries, xAxis, "Lưu lượng canxi trong tuần", "tuan");
+                        })
+                        .addOnFailureListener(e -> Log.e(TAG, "Error fetching data: " + e.getMessage()));
                 break;
             case "thang":
-                entries = new ArrayList<>();
-                entries.add(new BarEntry(1, 2));
-                entries.add(new BarEntry(8, 3));
-                entries.add(new BarEntry(18, 4));
-                entries.add(new BarEntry(25, 5));
-                entries.add(new BarEntry(28, 7));
 
-                dataSet = new BarDataSet(entries, "Canxi");
-                dataSet.setColors(ColorTemplate.rgb("71EA66"));
-                barData = new BarData(dataSet);
-                barChart.setData(barData);
-                barChart.setFitBars(true);
+                Calendar calendarThang = Calendar.getInstance();
+                long currentTimeThang = calendarThang.getTimeInMillis();
 
-                xAxis.setAxisMinimum(0);
-                xAxis.setAxisMaximum(31);
-                barChart.animateXY(2000, 2000);
-                barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-                barChart.getDescription().setText("Lưu lượng canxi trong tháng");
+                calendarThang.set(Calendar.DAY_OF_MONTH, 1);
+                long startOfMonthTimestamp = calendarThang.getTimeInMillis();
+
+                collectionReference
+                        .whereGreaterThanOrEqualTo("date", new Date(startOfMonthTimestamp))
+                        .whereLessThanOrEqualTo("date", new Date(currentTimeThang))
+                        .get()
+                        .addOnSuccessListener(queryDocumentSnapshots -> {
+                            // Handle the retrieved documents
+                            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                NutritionData nutritionData = new NutritionData(documentSnapshot);
+                                entries.add(new BarEntry(nutritionData.getDate().getDate(), nutritionData.getQuantity()));
+                                Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
+                            }
+                            updateChart(entries, xAxis, "Lưu lượng canxi trong tháng", "thang");
+                        })
+                        .addOnFailureListener(e -> Log.e(TAG, "Error fetching thang data: " + e.getMessage()));
                 break;
+
             case "nam":
-                entries = new ArrayList<>();
-                entries.add(new BarEntry(1, 2));
-                entries.add(new BarEntry(3, 3));
-                entries.add(new BarEntry(4, 4));
-                entries.add(new BarEntry(6, 5));
-                entries.add(new BarEntry(10, 7));
+                // Get the current time
+                Calendar calendarNam = Calendar.getInstance();
+                long currentTimeNam = calendarNam.getTimeInMillis();
 
-                dataSet = new BarDataSet(entries, "Canxi");
-                dataSet.setColors(ColorTemplate.rgb("71EA66"));
-                barData = new BarData(dataSet);
-                barChart.setData(barData);
-                barChart.setFitBars(true);
+                calendarNam.set(Calendar.MONTH, Calendar.JANUARY);
+                calendarNam.set(Calendar.DAY_OF_MONTH, 1);
+                long startOfYearTimestamp = calendarNam.getTimeInMillis();
 
-                xAxis.setAxisMinimum(0);
-                xAxis.setAxisMaximum(12);
-                barChart.animateXY(2000, 2000);
-                barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-                barChart.getDescription().setText("Lưu lượng canxi trong năm");
+                collectionReference
+                        .whereGreaterThanOrEqualTo("date", new Date(startOfYearTimestamp))
+                        .whereLessThanOrEqualTo("date", new Date(currentTimeNam))
+                        .get()
+                        .addOnSuccessListener(queryDocumentSnapshots -> {
+                            // Handle the retrieved documents
+                            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                NutritionData nutritionData = new NutritionData(documentSnapshot);
+                                entries.add(new BarEntry(nutritionData.getDate().getMonth() + 1, nutritionData.getQuantity()));
+                                Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
+                            }
+                            updateChart(entries, xAxis, "Lưu lượng canxi trong năm", "nam");
+                        })
+                        .addOnFailureListener(e -> Log.e(TAG, "Error fetching nam data: " + e.getMessage()));
                 break;
-
         }
     }
+
+    private void updateChart(ArrayList<BarEntry> entries, XAxis xAxis, String description, String type) {
+        BarDataSet dataSet = new BarDataSet(entries, "Canxi");
+        dataSet.setColors(ColorTemplate.rgb("71EA66"));
+        BarData barData = new BarData(dataSet);
+        barChart.setData(barData);
+        barChart.setFitBars(true);
+
+        xAxis.setAxisMinimum(0);
+        switch (type) {
+            case "ngay":
+                xAxis.setAxisMaximum(24);
+                break;
+            case "tuan":
+                xAxis.setAxisMaximum(7);
+                break;
+            case "thang":
+                xAxis.setAxisMaximum(31);
+                break;
+            case "nam":
+                xAxis.setAxisMaximum(12);
+                break;
+        }
+        barChart.animateXY(2000, 2000);
+        barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        barChart.getDescription().setText(description);
+    }
+
 
     private void updateUI(String type) {
         if (type == "tuan" || type == "thang") {
             tvHeading2.setText("Trung bình mỗi ngày");
         }
         else if (type == "nam") {
-            tvHeading2.setText("Trung bình");
+            tvHeading2.setText("Trung bình mỗi tháng");
         }
         else {
             tvHeading2.setText("Tổng");

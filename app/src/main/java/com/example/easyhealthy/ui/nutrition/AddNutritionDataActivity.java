@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -101,33 +102,34 @@ public class AddNutritionDataActivity extends AppCompatActivity {
                 // Parse the date string into a Date object
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                 Date parsedDate = null;
+
                 try {
                     parsedDate = dateFormat.parse(date);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
 
-                // Convert Date to Timestamp
-                Timestamp timestamp = new Timestamp(parsedDate);
+                // Format the date to create the Firestore document ID
 
-                NutritionData nutritionData = new NutritionData(type, timestamp, time, quantity);
+
+                NutritionData nutritionData = new NutritionData(type, parsedDate, time, quantity);
 
                 firestore.collection(type)
-                        .document(parsedDate.toString())
-                        .set(nutritionData)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        .add(nutritionData)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(getApplicationContext(), "save canxi successfully", Toast.LENGTH_LONG).show();
+                            public void onSuccess(DocumentReference documentReference) {
+                                Toast.makeText(getApplicationContext(), "Save canxi successfully", Toast.LENGTH_LONG).show();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getApplicationContext(), "save canxi failed", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Save canxi failed", Toast.LENGTH_LONG).show();
                             }
                         });
 
+                startActivity(new Intent(getApplicationContext(), DetailedNutritionActivity.class));
             }
         });
     }

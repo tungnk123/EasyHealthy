@@ -1,13 +1,31 @@
 package com.example.easyhealthy.model;
 
-import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.sql.Time;
+import java.util.Date;
 
 public class NutritionData {
     private String type;
-    private Timestamp date;
+    private Date date;
     private String time; // Change the type to String
 
     private int quantity;
+
+    public NutritionData(NutritionData documentSnapshot) {
+        this.type = documentSnapshot.type;
+        this.date = documentSnapshot.date;
+        this.time = documentSnapshot.time;
+    }
+
+    public NutritionData(DocumentSnapshot documentSnapshot) {
+        this.date = documentSnapshot.getDate("date");
+        this.type = documentSnapshot.getString("type");
+        this.time = documentSnapshot.getString("time");
+        this.quantity = documentSnapshot.getLong("quantity").intValue();
+    }
+
 
     public String getType() {
         return type;
@@ -17,18 +35,18 @@ public class NutritionData {
         this.type = type;
     }
 
-    public NutritionData(String type, Timestamp date, String time, int quantity) {
+    public NutritionData(String type, Date date, String time, int quantity) {
         this.type = type;
         this.date = date;
         this.time = time;
         this.quantity = quantity;
     }
 
-    public Timestamp getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
