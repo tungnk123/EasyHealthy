@@ -20,22 +20,15 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import org.w3c.dom.Text;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class DetailedNutritionActivity extends AppCompatActivity {
 
@@ -167,7 +160,6 @@ public class DetailedNutritionActivity extends AppCompatActivity {
         BarDataSet dataSet = new BarDataSet(entries, "Canxi");
         BarData barData = new BarData(dataSet);
         XAxis xAxis = barChart.getXAxis();
-
         switch (type) {
                     case "ngay":
                         // Get the current time
@@ -292,9 +284,31 @@ public class DetailedNutritionActivity extends AppCompatActivity {
         barChart.animateXY(2000, 2000);
         barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         barChart.getDescription().setText(description);
+
+        updateTrungBinh(entries, type);
     }
 
+    private void updateTrungBinh(ArrayList<BarEntry> entries, String type) {
+        int sum = 0;
+        for (int i = 0; i < entries.size(); i++) {
+            sum += entries.get(i).getY();
+        }
+        switch (type) {
+            case "ngay":
+                tvTrungBinh.setText(String.valueOf(sum));
+                break;
+            case "tuan":
+                tvTrungBinh.setText(String.valueOf(sum / 7));
+                break;
+            case "thang":
+                tvTrungBinh.setText(String.valueOf(sum / 30));
+                break;
+            case "nam":
+                tvTrungBinh.setText(String.valueOf(sum / 12));
+                break;
+        }
 
+    }
     private void updateUI(String type) {
         if (type == "tuan" || type == "thang") {
             tvHeading2.setText("Trung bình mỗi ngày");
