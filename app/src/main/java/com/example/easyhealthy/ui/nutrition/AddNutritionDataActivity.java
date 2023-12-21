@@ -74,6 +74,9 @@ public class AddNutritionDataActivity extends AppCompatActivity {
         btnAdd = (Button) findViewById(R.id.btn_addDetailNutrition);
         edtLuuLuong = (EditText) findViewById(R.id.edt_luuLuong);
         tvHeading = (TextView) findViewById(R.id.tv_detailedNutrition_heading);
+
+        Intent intent = getIntent();
+        tvHeading.setText(intent.getStringExtra("title"));
     }
 
     private void addEvents() {

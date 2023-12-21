@@ -25,10 +25,13 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.IntToDoubleFunction;
 
 public class DetailedNutritionActivity extends AppCompatActivity {
 
@@ -41,12 +44,17 @@ public class DetailedNutritionActivity extends AppCompatActivity {
     TextView tvHeading2;
     TextView tvTrungBinh;
 
+    TextView tvHeading1;
+
+    TextView tvGioiThieu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_nutrition);
         addControls();
         addEvents();
+        btnNgay.callOnClick();
     }
 
 
@@ -81,13 +89,22 @@ public class DetailedNutritionActivity extends AppCompatActivity {
 
         tvHeading2 = (TextView) findViewById(R.id.tv_detailedNutrition_heading2);
         tvTrungBinh = (TextView) findViewById(R.id.tv_detailedNutrition_trungBinh);
+        tvHeading1 = (TextView) findViewById(R.id.tv_detailedNutrition_heading);
+
+        Intent intent = getIntent();
+        tvHeading1.setText(intent.getStringExtra("title"));
+
+        tvGioiThieu = (TextView) findViewById(R.id.tv_detailedNutrition_gioiThieu);
+        tvGioiThieu.setText("Giới thiệu về " + tvHeading1.getText().toString());
     }
 
     private void addEvents() {
         btnThemDuLieu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), AddNutritionDataActivity.class));
+                Intent intent = new Intent(getApplicationContext(), AddNutritionDataActivity.class);
+                intent.putExtra("title", tvHeading1.getText().toString());
+                startActivity(intent);
             }
         });
         btnNgay.setOnClickListener(new View.OnClickListener() {
@@ -153,11 +170,11 @@ public class DetailedNutritionActivity extends AppCompatActivity {
 
     private void updateDataForChart(String type) {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        String collectionPath = "Canxi";
+        String collectionPath = tvHeading1.getText().toString();
 
         CollectionReference collectionReference = firestore.collection(collectionPath);
         ArrayList<BarEntry> entries = new ArrayList<>();
-        BarDataSet dataSet = new BarDataSet(entries, "Canxi");
+        BarDataSet dataSet = new BarDataSet(entries, tvHeading1.getText().toString());
         BarData barData = new BarData(dataSet);
         XAxis xAxis = barChart.getXAxis();
         switch (type) {
@@ -182,7 +199,7 @@ public class DetailedNutritionActivity extends AppCompatActivity {
                                         entries.add(new BarEntry(Integer.parseInt(nutritionData.getTime().substring(0, 2)), nutritionData.getQuantity()));
                                         Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
                                     }
-                                    updateChart(entries, xAxis, "Lưu lượng canxi trong ngày", "ngay");
+                                    updateChart(entries, xAxis, "Lưu lượng "+ tvHeading1.getText().toString() + " trong ngày", "ngay");
                                 })
                                 .addOnFailureListener(e -> Log.e("1", "Error fetching tuan data: " + e.getMessage()));
                         break;
@@ -204,7 +221,7 @@ public class DetailedNutritionActivity extends AppCompatActivity {
                                 entries.add(new BarEntry(nutritionData.getDate().getDay(), nutritionData.getQuantity()));
                                 Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
                             }
-                            updateChart(entries, xAxis, "Lưu lượng canxi trong tuần", "tuan");
+                            updateChart(entries, xAxis, "Lưu lượng "+ tvHeading1.getText().toString() + " trong tuần", "tuan");
                         })
                         .addOnFailureListener(e -> Log.e(TAG, "Error fetching data: " + e.getMessage()));
                 break;
@@ -227,7 +244,7 @@ public class DetailedNutritionActivity extends AppCompatActivity {
                                 entries.add(new BarEntry(nutritionData.getDate().getDate(), nutritionData.getQuantity()));
                                 Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
                             }
-                            updateChart(entries, xAxis, "Lưu lượng canxi trong tháng", "thang");
+                            updateChart(entries, xAxis, "Lưu lượng "+ tvHeading1.getText().toString() + " trong tháng", "thang");
                         })
                         .addOnFailureListener(e -> Log.e(TAG, "Error fetching thang data: " + e.getMessage()));
                 break;
@@ -252,7 +269,7 @@ public class DetailedNutritionActivity extends AppCompatActivity {
                                 entries.add(new BarEntry(nutritionData.getDate().getMonth() + 1, nutritionData.getQuantity()));
                                 Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
                             }
-                            updateChart(entries, xAxis, "Lưu lượng canxi trong năm", "nam");
+                            updateChart(entries, xAxis, "Lưu lượng "+ tvHeading1.getText().toString() + " trong năm", "nam");
                         })
                         .addOnFailureListener(e -> Log.e(TAG, "Error fetching nam data: " + e.getMessage()));
                 break;
@@ -260,7 +277,7 @@ public class DetailedNutritionActivity extends AppCompatActivity {
     }
 
     private void updateChart(ArrayList<BarEntry> entries, XAxis xAxis, String description, String type) {
-        BarDataSet dataSet = new BarDataSet(entries, "Canxi");
+        BarDataSet dataSet = new BarDataSet(entries, tvHeading1.getText().toString());
         dataSet.setColors(ColorTemplate.rgb("71EA66"));
         BarData barData = new BarData(dataSet);
         barChart.setData(barData);
