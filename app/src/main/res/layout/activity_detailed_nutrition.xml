@@ -29,8 +29,10 @@
                 <TextView
                     android:id="@+id/tv_detailedNutrition_heading"
                     style="@style/heading2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_width="100dp"
+                    android:gravity="center"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:text="Canxi" />
 
@@ -51,9 +53,9 @@
             android:id="@+id/btn_group_daySelector"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:background="#EFEBEB"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/background_rounded_border"
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:paddingStart="10dp"
@@ -62,32 +64,40 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tb_chiTietDinhDuong">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_rounded"
                 android:text="Ngày"
+                android:id="@+id/btn_ngay"
+                android:background="@drawable/background_rounded_selected_button"
+                android:textColor="@color/black"
                 android:textSize="11sp" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_tuan"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_rounded"
                 android:text="Tuần"
+                android:background="@drawable/background_rounded_transparent"
+                android:textColor="@color/black"
                 android:textSize="11sp" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="85dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_rounded"
+                android:id="@+id/btn_thang"
                 android:text="Tháng"
+                android:background="@drawable/background_rounded_transparent"
+                android:textColor="@color/black"
                 android:textSize="11sp" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_rounded"
+                android:id="@+id/btn_nam"
                 android:text="Năm"
+                android:background="@drawable/background_rounded_transparent"
+                android:textColor="@color/black"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -109,20 +119,30 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:text="100"
-            android:textSize="50dp"
+            android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_detailedNutrition_heading2" />
 
         <!-- Day la cho de bar chart-->
+        <com.github.mikephil.charting.charts.BarChart
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/chart"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/background_rounded"
+            app:layout_constraintTop_toBottomOf="@+id/tv_detailedNutrition_trungBinh"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="44dp"
-            android:text="ml"
-            android:textSize="25sp"
+            android:text="mg"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_detailedNutrition_trungBinh"
-            app:layout_constraintStart_toEndOf="@+id/tv_detailedNutrition_heading2"
+            app:layout_constraintStart_toEndOf="@+id/tv_detailedNutrition_trungBinh"
             app:layout_constraintTop_toTopOf="@+id/tv_detailedNutrition_trungBinh" />
 
         <TextView
@@ -131,10 +151,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
+            android:textSize="17sp"
+            android:layout_marginEnd="30dp"
             android:layout_marginTop="10dp"
             android:text="Giới thiệu về canxi"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_detailedNutrition_trungBinh" />
+            app:layout_constraintTop_toBottomOf="@+id/chart" />
 
         <TextView
             android:id="@+id/tv_detailedNutrition_noiDungGioiThieu"

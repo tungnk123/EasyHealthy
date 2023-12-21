@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "693983822659",
-    "project_id": "easyhealthy-23be5",
-    "storage_bucket": "easyhealthy-23be5.appspot.com"
+    "project_number": "563093038786",
+    "project_id": "easyhealthy-5bb39",
+    "storage_bucket": "easyhealthy-5bb39.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:693983822659:android:d0a8d32bd3e2856764a5f6",
+        "mobilesdk_app_id": "1:563093038786:android:1dd91ed852485f84533d5b",
         "android_client_info": {
           "package_name": "com.example.easyhealthy"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB5C6IxUCEoV9rVtJGmnjmxJfHjeUAUZTY"
+          "current_key": "AIzaSyC07ngknHHUs9SWx5hOZpURuAkgSTE8Ah0"
         }
       ],
       "services": {

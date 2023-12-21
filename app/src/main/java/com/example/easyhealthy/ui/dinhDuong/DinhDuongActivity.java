@@ -18,6 +18,9 @@ public class DinhDuongActivity extends AppCompatActivity {
 
     public RecyclerView rcvNoResult;
     public RecyclerView rcvHistory;
+
+    public RecyclerView rcvHistoryFood;
+    public RecyclerView rcvCurrentFood;
     public ListWithNoImageAdapter adapter;
     public HistoryListAdapter historyListAdapter;
     String[] dataset;
@@ -36,7 +39,7 @@ public class DinhDuongActivity extends AppCompatActivity {
     private void addControls() {
         dataset = new String[] {
                 "Canxi",
-                "Chất béo không bão hòa đa",
+                "Chất béo không bão hòa",
                 "Chất đạm",
                 "Chất xơ",
                 "Cholesterol thực phẩm",
@@ -73,21 +76,30 @@ public class DinhDuongActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new ListWithNoImageAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(String item) {
-                if (item.equals("Canxi")) {
-                    startActivity(new Intent(getApplicationContext(), DetailedNutritionActivity.class));
-                }
-                else {
-                    // Them cac loai dinh duong khac o day
-                }
+                Intent intent = new Intent(getApplicationContext(), DetailedNutritionActivity.class);
+                intent.putExtra("title", item);
+                startActivity(intent);
             }
         });
         rcvNoResult.setAdapter(adapter);
         rcvNoResult.setLayoutManager(new LinearLayoutManager(this));
 
-        rcvHistory = (RecyclerView) findViewById(R.id.rcv_dinhDuong_history);
+        rcvHistory = (RecyclerView) findViewById(R.id.rcv_dinhDuong_historyNutrition);
         historyListAdapter = new HistoryListAdapter(dataSet);
         rcvHistory.setAdapter(historyListAdapter);
         rcvHistory.setLayoutManager(new LinearLayoutManager(this));
+
+        rcvHistoryFood = (RecyclerView) findViewById(R.id.rcv_dinhDuong_historyFood);
+        rcvCurrentFood = (RecyclerView) findViewById(R.id.rcv_dinhDuong_currentFood);
+        String[] curFood = new String[] {
+            "Bánh mì",
+                "Phở",
+                "Cơm sườn"
+        };
+        adapter = new ListWithNoImageAdapter(curFood);
+        rcvCurrentFood.setAdapter(adapter);
+        rcvCurrentFood.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
     private void addEvents() {
