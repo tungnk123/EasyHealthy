@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_rounded"
+    android:layout_marginBottom="10dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/img_startIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        app:layout_goneMarginStart="20dp"
+        android:src="@drawable/ic_heart_rate"
+        android:layout_gravity="center"
+        android:layout_marginStart="15dp" />
+
+    <TextView
+        android:id="@+id/tv_itemTitle"
+        style="@style/list_item"
+        android:text="Máu đang nhiễm mỡ"
+        android:layout_width="0dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/img_startIcon"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tv_itemNumber"
+        style="@style/large_text"
+        android:text="5 mg"
+        android:layout_width="0dp"
+        android:textColor="@android:color/holo_red_light"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/tv_itemTitle"
+        app:layout_constraintStart_toEndOf="@+id/img_startIcon"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="15dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tv_itemTime"
+        style="@style/list_item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="25dp"
+        android:layout_weight="1"
+        android:textSize="10sp"
+        android:text="Chi tiết"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toStartOf="@+id/img_endIcon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_endIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_keyboard_arrow_right_24"
+        android:layout_gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
