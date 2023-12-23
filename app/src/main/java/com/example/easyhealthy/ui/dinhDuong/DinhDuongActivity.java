@@ -1,9 +1,19 @@
 package com.example.easyhealthy.ui.dinhDuong;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,7 +22,13 @@ import com.example.easyhealthy.R;
 import com.example.easyhealthy.adapter.HistoryListAdapter;
 import com.example.easyhealthy.adapter.ListWithNoImageAdapter;
 import com.example.easyhealthy.model.DuyetItem;
+import com.example.easyhealthy.ui.food.DetailedFoodActivity;
+import com.example.easyhealthy.ui.nutrition.AddNewNutritionActivity;
 import com.example.easyhealthy.ui.nutrition.DetailedNutritionActivity;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class DinhDuongActivity extends AppCompatActivity {
 
@@ -23,7 +39,39 @@ public class DinhDuongActivity extends AppCompatActivity {
     public RecyclerView rcvCurrentFood;
     public ListWithNoImageAdapter adapter;
     public HistoryListAdapter historyListAdapter;
-    String[] dataset;
+
+    Button btnAddNewNutrition;
+    List<String> dataset;
+
+    List<String> curFood;
+
+    ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if (result != null && result.getResultCode() == 101) {
+                String tenChatDinhDuong = result.getData().getStringExtra("TEN_CHAT_DINH_DUONG");
+                String moTa = result.getData().getStringExtra("MO_TA");
+                String tenDonVi = result.getData().getStringExtra("TEN_DON_VI");
+//                Toast.makeText(getApplicationContext(), "Add " + tenChatDinhDuong, Toast.LENGTH_LONG).show();
+                List<String> modifiableDataset = new ArrayList<>(dataset);
+                modifiableDataset.add(tenChatDinhDuong);
+                dataset = modifiableDataset;
+                adapter = new ListWithNoImageAdapter(dataset);
+                adapter.setOnItemClickListener(new ListWithNoImageAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(String item) {
+                        Intent intent = new Intent(getApplicationContext(), DetailedNutritionActivity.class);
+                        intent.putExtra("title", item);
+                        startActivity(intent);
+                    }
+                });
+                adapter.notifyDataSetChanged();
+                rcvNoResult.setAdapter(adapter);
+                rcvNoResult.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                Toast.makeText(getApplicationContext(), "Add " + tenChatDinhDuong, Toast.LENGTH_LONG).show();
+            }
+        }
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +85,7 @@ public class DinhDuongActivity extends AppCompatActivity {
 
 
     private void addControls() {
-        dataset = new String[] {
+        dataset = Arrays.asList(
                 "Canxi",
                 "Chất béo không bão hòa",
                 "Chất đạm",
@@ -57,9 +105,8 @@ public class DinhDuongActivity extends AppCompatActivity {
                 "Sắt",
                 "Selen",
                 "Tổng Chất Béo",
-                "Vitamin A",
-
-        };
+                "Vitamin A"
+                );
         DuyetItem[] dataSet = {
                 new DuyetItem("Dinh dưỡng", R.drawable.ic_nitrition),
                 new DuyetItem("Nước", R.drawable.ic_water),
@@ -91,19 +138,34 @@ public class DinhDuongActivity extends AppCompatActivity {
 
         rcvHistoryFood = (RecyclerView) findViewById(R.id.rcv_dinhDuong_historyFood);
         rcvCurrentFood = (RecyclerView) findViewById(R.id.rcv_dinhDuong_currentFood);
-        String[] curFood = new String[] {
+        curFood = Arrays.asList(
             "Bánh mì",
                 "Phở",
                 "Cơm sườn"
-        };
+        );
         adapter = new ListWithNoImageAdapter(curFood);
+        adapter.setOnItemClickListener(new ListWithNoImageAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(String item) {
+                Intent intent = new Intent(getApplicationContext(), DetailedFoodActivity.class);
+                intent.putExtra("title", item);
+                startActivity(intent);
+            }
+        });
         rcvCurrentFood.setAdapter(adapter);
         rcvCurrentFood.setLayoutManager(new LinearLayoutManager(this));
+
+        btnAddNewNutrition = (Button) findViewById(R.id.btn_addNewNutrition);
 
     }
 
     private void addEvents() {
-
+        btnAddNewNutrition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launcher.launch(new Intent(getApplicationContext(), AddNewNutritionActivity.class));
+            }
+        });
     }
 
     @Override
@@ -111,4 +173,5 @@ public class DinhDuongActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.bottom_nav_menu, menu);
         return true;
     }
+
 }

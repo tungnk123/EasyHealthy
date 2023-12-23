@@ -1,4 +1,4 @@
-package com.example.easyhealthy.ui.nutrition;
+package com.example.easyhealthy.ui.food;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.easyhealthy.R;
 import com.example.easyhealthy.model.NutritionData;
+import com.example.easyhealthy.ui.nutrition.DetailedNutritionActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -28,20 +29,21 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class AddNutritionDataActivity extends AppCompatActivity {
+public class AddFoodActivity extends AppCompatActivity {
 
     TextView tvNgayDatePikcer;
     TextView tvGioTimePicker;
     TextView tvHeading;
     Button btnAdd;
-    EditText edtLuuLuong;
+    EditText edtSoLuong;
+
+    TextView tvAddFoodData;
 
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_nutrition_data);
+        setContentView(R.layout.activity_add_food);
         addControls();
         addEvents();
     }
@@ -64,11 +66,21 @@ public class AddNutritionDataActivity extends AppCompatActivity {
         tvNgayDatePikcer.setText(formattedDate);
 
         btnAdd = (Button) findViewById(R.id.btn_addDetailNutrition);
-        edtLuuLuong = (EditText) findViewById(R.id.edt_soLuong);
+        edtSoLuong = (EditText) findViewById(R.id.edt_soLuong);
         tvHeading = (TextView) findViewById(R.id.tv_detailedFood_heading);
 
         Intent intent = getIntent();
         tvHeading.setText(intent.getStringExtra("title"));
+        tvAddFoodData = (TextView) findViewById(R.id.tv_addFoodData_data);
+        if (tvHeading.getText().toString().equals("Bánh mì")) {
+            tvAddFoodData.setText("ổ");
+        }
+        else if (tvHeading.getText().toString().equals("Phở")) {
+            tvAddFoodData.setText("tô");
+        }
+        else if (tvHeading.getText().toString().equals("Cơm sườn")) {
+            tvAddFoodData.setText("bát");
+        }
     }
 
     private void addEvents() {
@@ -92,7 +104,7 @@ public class AddNutritionDataActivity extends AppCompatActivity {
                 String type = tvHeading.getText().toString();
                 String date = tvNgayDatePikcer.getText().toString();
                 String time = tvGioTimePicker.getText().toString();
-                int quantity = Integer.parseInt(edtLuuLuong.getText().toString());
+                int quantity = Integer.parseInt(edtSoLuong.getText().toString());
 
                 // Parse the date string into a Date object
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
@@ -124,11 +136,10 @@ public class AddNutritionDataActivity extends AppCompatActivity {
                             }
                         });
 
-                startActivity(new Intent(getApplicationContext(), DetailedNutritionActivity.class));
+                startActivity(new Intent(getApplicationContext(), DetailedFoodActivity.class));
             }
         });
     }
-
     private void showDatePickerDialog() {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -165,4 +176,5 @@ public class AddNutritionDataActivity extends AppCompatActivity {
 
         timePickerDialog.show();
     }
+
 }
