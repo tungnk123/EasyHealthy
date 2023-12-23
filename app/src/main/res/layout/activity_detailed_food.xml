@@ -29,20 +29,20 @@
                 <TextView
                     android:id="@+id/tv_detailedFood_heading"
                     style="@style/heading2"
-                    android:textSize="18sp"
                     android:layout_width="100dp"
-                    android:gravity="center"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:text="Canxi" />
+                    android:gravity="center"
+                    android:text="Bánh mì"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
             <Button
+                android:id="@+id/btn_themDuLieu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:id="@+id/btn_themDuLieu"
                 android:background="@android:color/transparent"
                 android:text="Thêm dữ liệu"
                 android:textColor="@color/blue_300"
@@ -54,9 +54,9 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/background_rounded_border"
-            android:layout_marginTop="10dp"
             android:gravity="center"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
@@ -65,11 +65,11 @@
             app:layout_constraintTop_toBottomOf="@+id/tb_chiTietDinhDuong">
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_ngay"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:text="Ngày"
-                android:id="@+id/btn_ngay"
                 android:background="@drawable/background_rounded_selected_button"
+                android:text="Ngày"
                 android:textColor="@color/black"
                 android:textSize="11sp" />
 
@@ -77,26 +77,26 @@
                 android:id="@+id/btn_tuan"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:text="Tuần"
                 android:background="@drawable/background_rounded_transparent"
+                android:text="Tuần"
                 android:textColor="@color/black"
                 android:textSize="11sp" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_thang"
                 android:layout_width="85dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_thang"
-                android:text="Tháng"
                 android:background="@drawable/background_rounded_transparent"
+                android:text="Tháng"
                 android:textColor="@color/black"
                 android:textSize="11sp" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_nam"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_nam"
-                android:text="Năm"
                 android:background="@drawable/background_rounded_transparent"
+                android:text="Năm"
                 android:textColor="@color/black"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -118,29 +118,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:text="100"
+            android:text="1"
             android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_detailedFood_heading2" />
 
         <!-- Day la cho de bar chart-->
+
         <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/chart"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:id="@+id/chart"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/background_rounded"
-            app:layout_constraintTop_toBottomOf="@+id/tv_detailedFood_trungBinh"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_detailedFood_trungBinh" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="mg"
-            android:textSize="20sp"
             android:layout_marginStart="10dp"
+            android:text="ổ"
+            android:id="@+id/tv_donViDo"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_detailedFood_trungBinh"
             app:layout_constraintStart_toEndOf="@+id/tv_detailedFood_trungBinh"
             app:layout_constraintTop_toTopOf="@+id/tv_detailedFood_trungBinh" />
@@ -151,10 +154,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:textSize="17sp"
-            android:layout_marginEnd="30dp"
             android:layout_marginTop="10dp"
-            android:text="Giới thiệu về canxi"
+            android:layout_marginEnd="30dp"
+            android:text="Mô tả thức ăn"
+            android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chart" />
 
@@ -181,27 +184,19 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
-            android:text="Tùy chọn"
+            android:text="Chi tiết dinh dưỡng"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_detailedFood_noiDungGioiThieu" />
 
-        <TextView
-            android:id="@+id/tv_detailedNutrition_themUuThich"
-            style="@style/list_item"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_chiTietDinhDuongRcv"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
-            android:background="@drawable/background_rounded"
-            android:padding="20dp"
-            android:text="Thêm vào mục yêu thích"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_detailedFood_chiTietDinhDuong" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

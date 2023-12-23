@@ -107,8 +107,21 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
-            android:text="Không có dữ liệu"
+            android:text="Chất dinh dưỡng hiện có"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rcv_dinhDuong_historyNutrition" />
+
+        <Button
+            android:id="@+id/btn_addNewNutrition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:background="@android:color/transparent"
+            android:text="Thêm"
+            android:textColor="@color/blue_300"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rcv_dinhDuong_historyNutrition" />
 
         <androidx.recyclerview.widget.RecyclerView

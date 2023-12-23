@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.nutrition.AddNutritionDataActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_chiTietDinhDuong"
         android:layout_width="match_parent"
@@ -24,56 +25,58 @@
             <TextView
                 android:id="@+id/tv_detailedFood_heading"
                 style="@style/heading2"
-                android:textSize="18sp"
-                android:gravity="center"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Canxi" />
+                android:gravity="center"
+                android:text="Bánh mì"
+                android:textSize="18sp" />
 
         </LinearLayout>
 
         <Button
+            android:id="@+id/btn_addDetailNutrition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:background="@android:color/transparent"
             android:text="Thêm"
-            android:id="@+id/btn_addDetailNutrition"
             android:textColor="@color/blue_300"
             android:textSize="12sp" />
     </androidx.appcompat.widget.Toolbar>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/background_rounded"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
+        android:background="@drawable/background_rounded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tb_chiTietDinhDuong">
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ngày"
             android:id="@+id/tv_addFoodData_ngay"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="20dp"
             style="@style/list_item"
-            android:layout_marginStart="20dp"
-            />
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Giờ"
-            android:id="@+id/tv_addFoodData_gio"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_addFoodData_ngay"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
+            android:text="Ngày"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_addFoodData_gio"
             style="@style/list_item"
-            android:layout_marginStart="20dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Giờ"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_addFoodData_ngay" />
 
         <TextView
             android:id="@+id/tv_addFoodData_data"
@@ -83,7 +86,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:text="mg"
+            android:text="Ổ"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_addFoodData_gio" />
@@ -117,7 +120,7 @@
             android:layout_height="48dp"
             android:layout_marginEnd="20dp"
             android:gravity="center"
-            android:hint="Nhập mg"
+            android:hint="Nhập số lượng"
             android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_addFoodData_data" />

@@ -1,20 +1,26 @@
-package com.example.easyhealthy.ui.nutrition;
+package com.example.easyhealthy.ui.food;
 
 import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.easyhealthy.R;
+import com.example.easyhealthy.adapter.FoodNutritionAdapter;
 import com.example.easyhealthy.model.NutritionData;
+import com.example.easyhealthy.ui.nutrition.AddNutritionDataActivity;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -26,10 +32,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
-public class DetailedNutritionActivity extends AppCompatActivity {
+public class DetailedFoodActivity extends AppCompatActivity {
+
+    TextView tvHeading;
+    TextView tvDonViDo;
 
     Button btnThemDuLieu;
     Button btnNgay;
@@ -42,20 +53,24 @@ public class DetailedNutritionActivity extends AppCompatActivity {
 
     TextView tvHeading1;
 
-    TextView tvGioiThieu;
-
+    RecyclerView rcvChiTietDinhDuong;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detailed_nutrition);
+        setContentView(R.layout.activity_detailed_food);
+
         addControls();
         addEvents();
+
         btnNgay.callOnClick();
     }
 
-
-
     private void addControls() {
+        tvHeading = (TextView) findViewById(R.id.tv_detailedFood_heading);
+        tvDonViDo = (TextView) findViewById(R.id.tv_donViDo);
+
+
+
         btnNgay = (Button) findViewById(R.id.btn_ngay);
         btnTuan = (Button) findViewById(R.id.btn_tuan);
         btnThang = (Button) findViewById(R.id.btn_thang);
@@ -90,15 +105,28 @@ public class DetailedNutritionActivity extends AppCompatActivity {
         Intent intent = getIntent();
         tvHeading1.setText(intent.getStringExtra("title"));
 
-        tvGioiThieu = (TextView) findViewById(R.id.tv_detailedFood_gioiThieu);
-        tvGioiThieu.setText("Giới thiệu về " + tvHeading1.getText().toString());
+        // hard code
+        if (tvHeading1.getText().toString().equals("Bánh mì")) {
+            tvDonViDo.setText("ổ");
+        }
+        else if (tvHeading1.getText().toString().equals("Phở")) {
+            tvDonViDo.setText("tô");
+        }
+        else if (tvHeading1.getText().toString().equals("Cơm sườn")) {
+            tvDonViDo.setText("bát");
+        }
+        rcvChiTietDinhDuong = (RecyclerView) findViewById(R.id.rcv_chiTietDinhDuongRcv);
+        List<Pair<String, Integer>> nutritionList = Arrays.asList(new Pair<String, Integer>("Canxi", 20), new Pair<String, Integer>("Vitamin A", 30));
+        FoodNutritionAdapter foodNutritionAdapter = new FoodNutritionAdapter(nutritionList);
+        rcvChiTietDinhDuong.setAdapter(foodNutritionAdapter);
+        rcvChiTietDinhDuong.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void addEvents() {
         btnThemDuLieu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddNutritionDataActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AddFoodActivity.class);
                 intent.putExtra("title", tvHeading1.getText().toString());
                 startActivity(intent);
             }
@@ -163,7 +191,6 @@ public class DetailedNutritionActivity extends AppCompatActivity {
             }
         });
     }
-
     private void updateDataForChart(String type) {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         String collectionPath = tvHeading1.getText().toString();
@@ -174,31 +201,31 @@ public class DetailedNutritionActivity extends AppCompatActivity {
         BarData barData = new BarData(dataSet);
         XAxis xAxis = barChart.getXAxis();
         switch (type) {
-                    case "ngay":
-                        // Get the current time
-                        Calendar calendar = Calendar.getInstance();
-                        long currentTime = calendar.getTimeInMillis();
+            case "ngay":
+                // Get the current time
+                Calendar calendar = Calendar.getInstance();
+                long currentTime = calendar.getTimeInMillis();
 
-                        calendar.set(Calendar.HOUR_OF_DAY, 0);
-                        calendar.set(Calendar.MINUTE, 0);
-                        calendar.set(Calendar.SECOND, 0);
-                        calendar.set(Calendar.MILLISECOND, 0);
-                        long startOfDayTimestamp = calendar.getTimeInMillis();
-                        collectionReference
-                                .whereGreaterThanOrEqualTo("date", new Date(startOfDayTimestamp))
-                                .whereLessThanOrEqualTo("date", new Date(currentTime))
-                                .get()
-                                .addOnSuccessListener(queryDocumentSnapshots -> {
-                                    // Handle the retrieved documents
-                                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                        NutritionData nutritionData = new NutritionData(documentSnapshot);
-                                        entries.add(new BarEntry(Integer.parseInt(nutritionData.getTime().substring(0, 2)), nutritionData.getQuantity()));
-                                        Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
-                                    }
-                                    updateChart(entries, xAxis, "Lưu lượng "+ tvHeading1.getText().toString() + " trong ngày", "ngay");
-                                })
-                                .addOnFailureListener(e -> Log.e("1", "Error fetching tuan data: " + e.getMessage()));
-                        break;
+                calendar.set(Calendar.HOUR_OF_DAY, 0);
+                calendar.set(Calendar.MINUTE, 0);
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+                long startOfDayTimestamp = calendar.getTimeInMillis();
+                collectionReference
+                        .whereGreaterThanOrEqualTo("date", new Date(startOfDayTimestamp))
+                        .whereLessThanOrEqualTo("date", new Date(currentTime))
+                        .get()
+                        .addOnSuccessListener(queryDocumentSnapshots -> {
+                            // Handle the retrieved documents
+                            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                NutritionData nutritionData = new NutritionData(documentSnapshot);
+                                entries.add(new BarEntry(Integer.parseInt(nutritionData.getTime().substring(0, 2)), nutritionData.getQuantity()));
+                                Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
+                            }
+                            updateChart(entries, xAxis, "Lưu lượng "+ tvHeading1.getText().toString() + " trong ngày", "ngay");
+                        })
+                        .addOnFailureListener(e -> Log.e("1", "Error fetching tuan data: " + e.getMessage()));
+                break;
 
             case "tuan":
                 calendar = Calendar.getInstance();
@@ -271,7 +298,6 @@ public class DetailedNutritionActivity extends AppCompatActivity {
                 break;
         }
     }
-
     private void updateChart(ArrayList<BarEntry> entries, XAxis xAxis, String description, String type) {
         BarDataSet dataSet = new BarDataSet(entries, tvHeading1.getText().toString());
         dataSet.setColors(ColorTemplate.rgb("71EA66"));
