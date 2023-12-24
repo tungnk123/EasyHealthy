@@ -15,6 +15,9 @@
         android:theme="@style/Theme.EasyHealthy"
         tools:targetApi="31">
         <activity
+            android:name=".ui.baibao.ChiTietBaiBaoActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.nutrition.AddNewNutritionActivity"
             android:exported="false" />
         <activity

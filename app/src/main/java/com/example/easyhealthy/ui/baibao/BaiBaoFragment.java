@@ -1,10 +1,12 @@
 package com.example.easyhealthy.ui.baibao;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -14,10 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.easyhealthy.R;
 import com.example.easyhealthy.adapter.BaiBaoAdapter;
+import com.example.easyhealthy.adapter.ListWithImageAdapter;
 import com.example.easyhealthy.adapter.NguyCoAdapter;
 import com.example.easyhealthy.databinding.FragmentBaibaoBinding;
 import com.example.easyhealthy.databinding.FragmentDuyetBinding;
 import com.example.easyhealthy.model.DuyetItem;
+import com.example.easyhealthy.ui.dinhDuong.DinhDuongActivity;
+
+import java.util.Objects;
 
 public class BaiBaoFragment extends Fragment {
 
@@ -63,12 +69,20 @@ public class BaiBaoFragment extends Fragment {
         rcvNguyCo.setLayoutManager(new LinearLayoutManager(getContext()));
 
         baiBaoAdapter = new BaiBaoAdapter(baiBaoList);
+        baiBaoAdapter.setOnItemClickListener(new BaiBaoAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DuyetItem item) {
+                Intent intent = new Intent(getContext(), ChiTietBaiBaoActivity.class);
+                startActivity(intent);
+            }
+        });
         rcvBaiBao.setAdapter(baiBaoAdapter);
         rcvBaiBao.setLayoutManager(new LinearLayoutManager(getContext()));
 
     }
 
     private void addEvents() {
+
     }
 
     @Override
