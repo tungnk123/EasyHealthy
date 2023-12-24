@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="50dp"
-    tools:context=".ui.baibao.ChiTietBaiBaoActivity">
+    tools:context=".ui.hoatdong.HoatDongActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,69 +32,50 @@
                     style="@style/heading2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cảnh báo sức khỏe" />
+                    android:text="Hoạt động" />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_error"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_currentFood"
-            app:layout_constraintEnd_toStartOf="@+id/tv_currentFood"
-            app:layout_constraintTop_toBottomOf="@+id/tb_dinhDuong" />
 
         <TextView
             android:id="@+id/tv_currentFood"
             style="@style/heading3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="24dp"
-            android:text="Các nguy cơ"
+            android:text="30 ngày qua"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tb_dinhDuong" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_nguyCo"
+            android:id="@+id/rcv_hoatDongHistory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_currentFood" />
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_news"
-            app:layout_constraintEnd_toStartOf="@+id/tv_historyFood"
-            app:layout_constraintTop_toBottomOf="@+id/rcv_nguyCo" />
 
         <TextView
             android:id="@+id/tv_historyFood"
             style="@style/heading3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="24dp"
-            android:text="Bài báo về sức khỏe liên quan"
+            android:text="Tất cả"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rcv_nguyCo" />
+            app:layout_constraintTop_toBottomOf="@+id/rcv_hoatDongHistory" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_baiBao"
+            android:id="@+id/rcv_allHoatDong"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="30dp"
             android:layout_marginBottom="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
