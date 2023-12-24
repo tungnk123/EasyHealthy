@@ -1,9 +1,7 @@
 package com.example.easyhealthy.ui.dinhDuong;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +11,6 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -136,8 +133,8 @@ public class DinhDuongActivity extends AppCompatActivity {
         rcvHistory.setAdapter(historyListAdapter);
         rcvHistory.setLayoutManager(new LinearLayoutManager(this));
 
-        rcvHistoryFood = (RecyclerView) findViewById(R.id.rcv_dinhDuong_historyFood);
-        rcvCurrentFood = (RecyclerView) findViewById(R.id.rcv_dinhDuong_currentFood);
+        rcvHistoryFood = (RecyclerView) findViewById(R.id.rcv_baiBao);
+        rcvCurrentFood = (RecyclerView) findViewById(R.id.rcv_nguyCo);
         curFood = Arrays.asList(
             "Bánh mì",
                 "Phở",

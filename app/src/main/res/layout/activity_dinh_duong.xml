@@ -47,7 +47,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tb_dinhDuong" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_dinhDuong_currentFood"
+            android:id="@+id/rcv_nguyCo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -66,10 +66,10 @@
             android:layout_marginTop="30dp"
             android:text="Lịch sử ăn uống"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rcv_dinhDuong_currentFood" />
+            app:layout_constraintTop_toBottomOf="@+id/rcv_nguyCo" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_dinhDuong_historyFood"
+            android:id="@+id/rcv_baiBao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -87,7 +87,7 @@
             android:layout_marginTop="30dp"
             android:text="Lịch sử dinh dưỡng"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rcv_dinhDuong_historyFood" />
+            app:layout_constraintTop_toBottomOf="@+id/rcv_baiBao" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_dinhDuong_historyNutrition"

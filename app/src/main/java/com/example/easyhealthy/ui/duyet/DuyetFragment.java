@@ -36,6 +36,7 @@ public class DuyetFragment extends Fragment {
         rcvListItem = binding.rcvDanhMucSucKhoe;
         DuyetItem[] dataSet = {
                 new DuyetItem("Dinh dưỡng", R.drawable.ic_nitrition),
+                new DuyetItem("Lượng nước", R.drawable.ic_water),
                 new DuyetItem("Sinh hiệu", R.drawable.ic_sinhhieu),
                 new DuyetItem("Ngủ", R.drawable.ic_bed),
                 new DuyetItem("Triệu chứng", R.drawable.ic_trieuchung),
