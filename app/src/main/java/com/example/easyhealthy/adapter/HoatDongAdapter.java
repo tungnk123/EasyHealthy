@@ -11,9 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.easyhealthy.R;
 import com.example.easyhealthy.model.DuyetItem;
+import com.example.easyhealthy.model.HoatDongData;
+import com.example.easyhealthy.model.NutritionData;
+
+import java.util.List;
 
 public class HoatDongAdapter extends RecyclerView.Adapter<HoatDongAdapter.ListItemHolder> {
-    private final DuyetItem[] localDataSet;
+    private final List<HoatDongData> localDataSet;
     private OnItemClickListener mListener;
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -22,7 +26,7 @@ public class HoatDongAdapter extends RecyclerView.Adapter<HoatDongAdapter.ListIt
 
 
 
-    public HoatDongAdapter(DuyetItem[] dataSet) {
+    public HoatDongAdapter(List<HoatDongData> dataSet) {
         localDataSet = dataSet;
     }
     @NonNull
@@ -36,18 +40,20 @@ public class HoatDongAdapter extends RecyclerView.Adapter<HoatDongAdapter.ListIt
 
     @Override
     public void onBindViewHolder(@NonNull ListItemHolder holder, int position) {
-        holder.tvTitle.setText(localDataSet[position].getTitle());
-        holder.imageView.setImageResource(localDataSet[position].getIcon());
+        holder.tvTitle.setText(localDataSet.get(position).getTitle());
+        holder.imageView.setImageResource(localDataSet.get(position).getIcon());
+        String numberData = localDataSet.get(position).getNumber() + " " + localDataSet.get(position).getDonViDo();
+        holder.tvNumber.setText(numberData);
         holder.itemView.setOnClickListener(v -> {
             if (mListener != null) {
-                mListener.onItemClick(localDataSet[position]);
+                mListener.onItemClick(localDataSet.get(position));
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return localDataSet.length;
+        return localDataSet.size();
     }
 
     public static class ListItemHolder extends RecyclerView.ViewHolder {
@@ -64,7 +70,7 @@ public class HoatDongAdapter extends RecyclerView.Adapter<HoatDongAdapter.ListIt
 
     }
     public interface OnItemClickListener {
-        void onItemClick(DuyetItem item);
+        void onItemClick(HoatDongData item);
     }
 
 }

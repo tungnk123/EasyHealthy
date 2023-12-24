@@ -11,9 +11,11 @@ import com.example.easyhealthy.R;
 import com.example.easyhealthy.adapter.HoatDongAdapter;
 import com.example.easyhealthy.adapter.ListWithNoImageAdapter;
 import com.example.easyhealthy.model.DuyetItem;
+import com.example.easyhealthy.model.HoatDongData;
 import com.example.easyhealthy.ui.food.DetailedFoodActivity;
 import com.example.easyhealthy.ui.nutrition.DetailedNutritionActivity;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class HoatDongActivity extends AppCompatActivity {
     ListWithNoImageAdapter listWithNoImageAdapter;
     HoatDongAdapter hoatDongAdapter;
 
-    DuyetItem[] hoatDongHistoryList;
+    List<HoatDongData> hoatDongHistoryList;
 
     List<String> dataSet;
     @Override
@@ -57,16 +59,14 @@ public class HoatDongActivity extends AppCompatActivity {
         rcvAllHoatDong.setAdapter(listWithNoImageAdapter);
         rcvAllHoatDong.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        hoatDongHistoryList = new DuyetItem[] {
-                new DuyetItem("Calories tiêu thụ", R.drawable.ic_fire),
-                new DuyetItem("Quãng đường chạy bộ", R.drawable.ic_fire),
-                new DuyetItem("Số phút thể dục", R.drawable.ic_fire),
-        };
-
+        hoatDongHistoryList = new ArrayList<>();
+        hoatDongHistoryList.add(new HoatDongData("Calories tiêu thụ", R.drawable.ic_fire, 200, "calo"));
+        hoatDongHistoryList.add(new HoatDongData("Quãng đường chạy bộ", R.drawable.ic_fire, 4, "km"));
+        hoatDongHistoryList.add(new HoatDongData("Số phút thể dục", R.drawable.ic_fire, 30, "phút"));
         hoatDongAdapter = new HoatDongAdapter(hoatDongHistoryList);
         hoatDongAdapter.setOnItemClickListener(new HoatDongAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(DuyetItem item) {
+            public void onItemClick(HoatDongData item) {
                 Intent intent = new Intent(getApplicationContext(), ChiTietHoatDongActivity.class);
                 intent.putExtra("title", item.getTitle());
                 addMota(intent, item.getTitle());
