@@ -15,6 +15,12 @@
         android:theme="@style/Theme.EasyHealthy"
         tools:targetApi="31">
         <activity
+            android:name=".ui.hoatdong.AddNewHoatDongActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.hoatdong.ChiTietHoatDongActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.hoatdong.HoatDongActivity"
             android:exported="false" />
         <activity
