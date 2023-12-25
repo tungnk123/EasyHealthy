@@ -134,7 +134,7 @@ public class DinhDuongActivity extends AppCompatActivity {
         rcvHistory.setLayoutManager(new LinearLayoutManager(this));
 
         rcvHistoryFood = (RecyclerView) findViewById(R.id.rcv_baiBao);
-        rcvCurrentFood = (RecyclerView) findViewById(R.id.rcv_nguyCo);
+        rcvCurrentFood = (RecyclerView) findViewById(R.id.rcv_curFood);
         curFood = Arrays.asList(
             "Bánh mì",
                 "Phở",

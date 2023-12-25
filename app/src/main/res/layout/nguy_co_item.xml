@@ -22,6 +22,7 @@
     <TextView
         android:id="@+id/tv_itemTitle"
         style="@style/list_item"
+        android:textSize="14sp"
         android:text="Máu đang nhiễm mỡ"
         android:layout_width="0dp"
         android:textColor="@android:color/holo_red_dark"

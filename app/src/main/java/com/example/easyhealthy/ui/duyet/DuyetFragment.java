@@ -18,6 +18,7 @@ import com.example.easyhealthy.adapter.ListWithImageAdapter;
 import com.example.easyhealthy.databinding.FragmentDuyetBinding;
 import com.example.easyhealthy.model.DuyetItem;
 import com.example.easyhealthy.ui.dinhDuong.DinhDuongActivity;
+import com.example.easyhealthy.ui.hoatdong.HoatDongActivity;
 
 import java.util.Objects;
 
@@ -51,6 +52,10 @@ public class DuyetFragment extends Fragment {
                 Toast.makeText(requireContext(), "Clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
                 if (Objects.equals(item.getTitle(), "Dinh dưỡng")) {
                     Intent intent = new Intent(getContext(), DinhDuongActivity.class);
+                    startActivity(intent);
+                }
+                else if (Objects.equals(item.getTitle(), "Hoạt động")) {
+                    Intent intent = new Intent(getContext(), HoatDongActivity.class);
                     startActivity(intent);
                 }
             }
