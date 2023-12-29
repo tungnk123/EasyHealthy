@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,6 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyHealthy"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.sinh_hieu.AddNewSinhHieuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.sinh_hieu.ChiTietSinhHieuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.sinh_hieu.SinhHieuActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.hoatdong.AddNewHoatDongActivity"
             android:exported="false" />

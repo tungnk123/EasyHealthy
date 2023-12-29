@@ -152,7 +152,7 @@ public class DinhDuongActivity extends AppCompatActivity {
         rcvCurrentFood.setAdapter(adapter);
         rcvCurrentFood.setLayoutManager(new LinearLayoutManager(this));
 
-        btnAddNewNutrition = (Button) findViewById(R.id.btn_addNewNutrition);
+        btnAddNewNutrition = (Button) findViewById(R.id.btn_addNewSinhHieu);
 
     }
 

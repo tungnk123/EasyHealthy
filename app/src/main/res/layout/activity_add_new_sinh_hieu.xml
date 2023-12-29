@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.nutrition.AddNewNutritionActivity">
+    tools:context=".ui.sinh_hieu.AddNewSinhHieuActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_chiTietDinhDuong"
@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Thêm chất dinh dưỡng"
+                android:text="Thêm sinh hiệu"
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -53,7 +53,7 @@
         android:layout_marginEnd="30dp"
         android:background="@drawable/background_rounded"
         android:gravity="center|start"
-        android:hint="@string/tenthucan_title"
+        android:hint="Tên sinh hiệu"
         android:inputType="text"
         android:paddingStart="30dp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,4 +1,4 @@
-package com.example.easyhealthy.ui.hoatdong;
+package com.example.easyhealthy.ui.sinh_hieu;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.example.easyhealthy.R;
 import com.example.easyhealthy.model.NutritionData;
-import com.example.easyhealthy.ui.nutrition.DetailedNutritionActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -29,7 +28,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class AddNewHoatDongActivity extends AppCompatActivity {
+public class AddSinhHieuDataActivity extends AppCompatActivity {
 
     TextView tvNgayDatePikcer;
     TextView tvGioTimePicker;
@@ -131,7 +130,7 @@ public class AddNewHoatDongActivity extends AppCompatActivity {
                             }
                         });
 
-                startActivity(new Intent(getApplicationContext(), DetailedNutritionActivity.class));
+                startActivity(new Intent(getApplicationContext(), ChiTietSinhHieuActivity.class));
             }
         });
     }

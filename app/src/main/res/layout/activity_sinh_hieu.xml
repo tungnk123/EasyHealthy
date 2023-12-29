@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="50dp"
-    tools:context=".ui.hoatdong.HoatDongActivity">
+    tools:context=".ui.sinh_hieu.SinhHieuActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                     style="@style/heading2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hoạt động" />
+                    android:text="Sinh hiệu" />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="24dp"
-            android:text="Lịch sử hoạt động"
+            android:text="Lịch sử sinh hiệu"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tb_dinhDuong" />
 
@@ -65,10 +65,21 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="24dp"
-            android:text="Tất cả"
+            android:text="Tất cả các sinh hiệu"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rcv_sinhHieuHistory" />
 
+        <Button
+            android:id="@+id/btn_addNewSinhHieu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:background="@android:color/transparent"
+            android:text="Thêm"
+            android:textColor="@color/blue_300"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_historyFood"
+            app:layout_constraintEnd_toEndOf="parent" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_allSinhHieu"
             android:layout_width="match_parent"

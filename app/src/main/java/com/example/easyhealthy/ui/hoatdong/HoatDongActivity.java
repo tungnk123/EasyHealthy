@@ -10,10 +10,7 @@ import android.os.Bundle;
 import com.example.easyhealthy.R;
 import com.example.easyhealthy.adapter.HoatDongAdapter;
 import com.example.easyhealthy.adapter.ListWithNoImageAdapter;
-import com.example.easyhealthy.model.DuyetItem;
 import com.example.easyhealthy.model.HoatDongData;
-import com.example.easyhealthy.ui.food.DetailedFoodActivity;
-import com.example.easyhealthy.ui.nutrition.DetailedNutritionActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,8 +37,8 @@ public class HoatDongActivity extends AppCompatActivity {
     }
 
     void addControls() {
-        rcvAllHoatDong = (RecyclerView) findViewById(R.id.rcv_allHoatDong);
-        rcvHoatDongHistory = (RecyclerView) findViewById(R.id.rcv_hoatDongHistory);
+        rcvAllHoatDong = (RecyclerView) findViewById(R.id.rcv_allSinhHieu);
+        rcvHoatDongHistory = (RecyclerView) findViewById(R.id.rcv_sinhHieuHistory);
 
         dataSet = Arrays.asList("Quãng đường chạy bộ", "Calories tiêu thụ", "Số phút thể dục", "Khoảng cách bơi", "Số phút di chuyển", "Số phút đứng");
         listWithNoImageAdapter = new ListWithNoImageAdapter(dataSet);
