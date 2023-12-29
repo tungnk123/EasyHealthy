@@ -112,7 +112,7 @@
             app:layout_constraintTop_toBottomOf="@+id/rcv_dinhDuong_historyNutrition" />
 
         <Button
-            android:id="@+id/btn_addNewNutrition"
+            android:id="@+id/btn_addNewSinhHieu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

@@ -39,7 +39,7 @@
             android:layout_gravity="end"
             android:background="@android:color/transparent"
             android:text="Thêm"
-            android:id="@+id/btn_addDetailNutrition"
+            android:id="@+id/btn_addSinhHieu"
             android:textColor="@color/blue_300"
             android:textSize="12sp" />
     </androidx.appcompat.widget.Toolbar>
