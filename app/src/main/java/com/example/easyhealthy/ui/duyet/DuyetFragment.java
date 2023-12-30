@@ -17,6 +17,7 @@ import com.example.easyhealthy.R;
 import com.example.easyhealthy.adapter.ListWithImageAdapter;
 import com.example.easyhealthy.databinding.FragmentDuyetBinding;
 import com.example.easyhealthy.model.DuyetItem;
+import com.example.easyhealthy.ui.chi_so_co_the.ChiSoCoTheActivity;
 import com.example.easyhealthy.ui.dinhDuong.DinhDuongActivity;
 import com.example.easyhealthy.ui.hoatdong.HoatDongActivity;
 import com.example.easyhealthy.ui.sinh_hieu.SinhHieuActivity;
@@ -64,6 +65,10 @@ public class DuyetFragment extends Fragment {
                     startActivity(intent);
                 }
                 // TODO: Ae nao lam man hinh nao thi them o day
+                else if (Objects.equals(item.getTitle(), "Số đo cơ thể")) {
+                    Intent intent = new Intent(getContext(), ChiSoCoTheActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         rcvListItem.setAdapter(listAdapter);
