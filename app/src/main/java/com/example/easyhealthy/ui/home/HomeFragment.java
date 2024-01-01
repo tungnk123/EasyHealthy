@@ -8,6 +8,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,15 @@ import com.example.easyhealthy.adapter.ListWithImageAdapter;
 import com.example.easyhealthy.adapter.NguyCoAdapter;
 import com.example.easyhealthy.databinding.FragmentHomeBinding;
 import com.example.easyhealthy.model.DuyetItem;
+import com.example.easyhealthy.model.NutritionData;
 import com.example.easyhealthy.ui.baibao.ChiTietBaiBaoActivity;
+import com.example.easyhealthy.ui.nutrition.DetailedNutritionActivity;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class HomeFragment extends Fragment implements SensorEventListener {
 
@@ -40,6 +49,9 @@ public class HomeFragment extends Fragment implements SensorEventListener {
 
     RecyclerView rcvDinhDuong;
     HistoryListAdapter adapter;
+    NutritionData[] dataSet;
+
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -68,19 +80,27 @@ public class HomeFragment extends Fragment implements SensorEventListener {
         binding.rcvBaiBao.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
-        DuyetItem[] dataSet = {
-                new DuyetItem("Chất đạm", R.drawable.ic_nitrition),
-                new DuyetItem("Chất xơ", R.drawable.ic_nitrition),
-                new DuyetItem("Chất béo", R.drawable.ic_nitrition),
+         dataSet = new NutritionData[]{
+                 new NutritionData("Chất đạm", Calendar.getInstance().getTime(), "20:01", 200),
+                 new NutritionData("Chất xơ", Calendar.getInstance().getTime(), "20:01", 100),
+                 new NutritionData("Chất béo", Calendar.getInstance().getTime(), "20:01", 300),
 
-
-        };
+         };
         rcvDinhDuong = binding.rcvMucYeuThich;
         adapter = new HistoryListAdapter(dataSet);
+        adapter.setOnItemClickListener(new HistoryListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(NutritionData item) {
+                Intent intent = new Intent(getContext(), DetailedNutritionActivity.class);
+                intent.putExtra("title", item.getType());
+                startActivity(intent);
+            }
+        });
         rcvDinhDuong.setAdapter(adapter);
         rcvDinhDuong.setLayoutManager(new LinearLayoutManager(getContext()));
 
-
+        updateDataInCardView();
+        updateDataInRcv();
         return root;
     }
 
@@ -100,6 +120,7 @@ public class HomeFragment extends Fragment implements SensorEventListener {
             MagnitudePrevious = 0.0;
             sensorManager.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_NORMAL);
         }
+        updateChiSoBuocChan();
     }
 
     @Override
@@ -134,5 +155,156 @@ public class HomeFragment extends Fragment implements SensorEventListener {
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
         // Handle accuracy changes if needed
+    }
+
+    public void updateChiSoBuocChan() {
+        binding.tvCaloBuocChan.setText(String.valueOf(stepCount * 0.05));
+        binding.tvKmBuocChan.setText(String.valueOf((int) (stepCount * 0.0006)));
+        binding.tvPhutBuocChan.setText(String.valueOf((int) (stepCount * 0.01)));
+    }
+
+    public void updateDataInCardView() {
+        firestore.collection("Cân nặng")
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        if (document.getDouble("quantity") > 0) {
+                            binding.tvCanNangValue.setText(String.valueOf(document.getDouble("quantity").intValue()));
+                        }
+                        else {
+                            binding.tvCanNangValue.setText("--");
+                        }
+                    }
+
+                    // Sau khi lấy được dữ liệu mới nhất, bạn có thể cập nhật CardView ở đây
+                })
+                .addOnFailureListener(e -> {
+                });
+
+        firestore.collection("Huyết áp")
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        if (document.getDouble("quantity") > 0) {
+                            binding.tvHuyetApValue.setText(String.valueOf(document.getDouble("quantity").intValue()));
+                        }
+                        else {
+                            binding.tvHuyetApValue.setText("--");
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> {
+                });
+        firestore.collection("Đường huyết")
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        if (document.getDouble("quantity") > 0) {
+                            binding.tvDuongHuyetValue.setText(String.valueOf(document.getDouble("quantity").intValue()));
+                        }
+                        else {
+                            binding.tvDuongHuyetValue.setText("--");
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> {
+                });
+        firestore.collection("Nhịp tim")
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        if (document.getDouble("quantity") > 0) {
+                            binding.tvNhipTimValue.setText(String.valueOf(document.getDouble("quantity").intValue()));
+                        }
+                        else {
+                            binding.tvNhipTimValue.setText("--");
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> {
+                });
+        firestore.collection("Thời lượng ngủ")
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        if (document.getDouble("quantity") > 0) {
+                            binding.tvSleepValue.setText(String.valueOf(document.getDouble("quantity").intValue()));
+                        }
+                        else {
+                            binding.tvSleepValue.setText("--");
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> {
+                });
+        firestore.collection("Calories tiêu thụ")
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        if (document.getDouble("quantity") > 0) {
+                            binding.tvCaloValue.setText(String.valueOf(document.getDouble("quantity").intValue()));
+                        }
+                        else {
+                            binding.tvCaloValue.setText("--");
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> {
+                });
+
+
+
+    }
+
+    public void updateDataInRcv() {
+        firestore.collection("Chất đạm")
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        dataSet[0] = new NutritionData(document);
+                        adapter.notifyDataSetChanged();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                });
+        firestore.collection("Chất xơ")
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        dataSet[1] = new NutritionData(document);
+                        adapter.notifyDataSetChanged();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                });
+        firestore.collection("Chất béo")
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        dataSet[2] = new NutritionData(document);
+                        adapter.notifyDataSetChanged();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                });
+
     }
 }
