@@ -19,12 +19,14 @@ import com.example.easyhealthy.R;
 import com.example.easyhealthy.adapter.HistoryListAdapter;
 import com.example.easyhealthy.adapter.ListWithNoImageAdapter;
 import com.example.easyhealthy.model.DuyetItem;
+import com.example.easyhealthy.model.NutritionData;
 import com.example.easyhealthy.ui.food.DetailedFoodActivity;
 import com.example.easyhealthy.ui.nutrition.AddNewNutritionActivity;
 import com.example.easyhealthy.ui.nutrition.DetailedNutritionActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 public class DinhDuongActivity extends AppCompatActivity {
@@ -104,14 +106,11 @@ public class DinhDuongActivity extends AppCompatActivity {
                 "Tổng Chất Béo",
                 "Vitamin A"
                 );
-        DuyetItem[] dataSet = {
-                new DuyetItem("Dinh dưỡng", R.drawable.ic_nitrition),
-                new DuyetItem("Nước", R.drawable.ic_water),
-                new DuyetItem("Sinh hiệu", R.drawable.ic_sinhhieu),
-                new DuyetItem("Ngủ", R.drawable.ic_bed),
-                new DuyetItem("Triệu chứng", R.drawable.ic_trieuchung),
-                new DuyetItem("Hoạt động", R.drawable.ic_fire),
-                new DuyetItem("Số đo cơ thể", R.drawable.ic_body),
+        NutritionData[] dataSet = {
+                new NutritionData("Chất đạm", Calendar.getInstance().getTime(), "20:01", 200),
+                new NutritionData("Chất xơ", Calendar.getInstance().getTime(), "20:01", 100),
+                new NutritionData("Chất béo", Calendar.getInstance().getTime(), "20:01", 300),
+
 
         };
 

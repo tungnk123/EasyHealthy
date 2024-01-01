@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="20dp"
         app:layout_goneMarginStart="20dp"
-        android:src="@drawable/baseline_manage_accounts_24"
+        android:src="@drawable/ic_nitrition"
         android:layout_gravity="center"
         android:layout_marginStart="15dp" />
 
@@ -46,6 +46,18 @@
         android:layout_marginEnd="30dp"
         android:layout_marginTop="15dp"
         android:layout_weight="1" />
+
+    <TextView
+        style="@style/list_item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_weight="1"
+        android:text="mg"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_itemNumber"
+        app:layout_constraintTop_toBottomOf="@+id/tv_itemTitle" />
 
     <TextView
         android:id="@+id/tv_itemTime"

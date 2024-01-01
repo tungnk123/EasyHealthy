@@ -107,6 +107,7 @@
                 style="@style/large_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/tv_caloBuocChan"
                 android:layout_marginEnd="10dp"
                 android:text="0"
                 android:textColor="@color/blue_300"
@@ -135,6 +136,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
+                android:id="@+id/tv_kmBuocChan"
                 android:text="0"
                 android:textColor="@color/blue_300"
                 android:textSize="25sp" />
@@ -164,6 +166,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:text="0"
+                android:id="@+id/tv_phutBuocChan"
                 android:textColor="@color/blue_300"
                 android:textSize="25sp" />
 
@@ -236,7 +239,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="16dp"
-                    android:text="100/70"
+                    android:text="--"
                     android:textSize="25sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_huyetAp_title" />
@@ -301,7 +304,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="16dp"
-                    android:text="70"
+                    android:text="--"
                     android:textSize="25sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_canNang_title" />
@@ -366,7 +369,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="16dp"
-                    android:text="100/70"
+                    android:text="--"
                     android:textSize="25sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_duongHuyet_title" />
@@ -431,7 +434,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="16dp"
-                    android:text="70"
+                    android:text="--"
                     android:textSize="25sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_nhipTim_title" />
@@ -496,7 +499,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="16dp"
-                    android:text="7h20"
+                    android:text="--"
                     android:textSize="25sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_sleep_title" />
@@ -561,7 +564,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="16dp"
-                    android:text="700"
+                    android:text="--"
                     android:textSize="25sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_calo_title" />
