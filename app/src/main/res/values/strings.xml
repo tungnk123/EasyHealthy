@@ -6,4 +6,13 @@
     <string name="title_duyetpage">Danh mục sức khỏe</string>
     <string name="title_baibao">Bài báo</string>
     <string name="tenthucan_title">Tên chất dinh dưỡng</string>
+
+    <string-array name="nutrition_list">
+        <item>Chất béo</item>
+        <item>Chất xơ</item>
+        <item>Chất đạm</item>
+        <item>Chất béo</item>
+        <item>Canxi</item>
+        <item>Clorua</item>
+    </string-array>
 </resources>

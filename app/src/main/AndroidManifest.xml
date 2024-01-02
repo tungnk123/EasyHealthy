@@ -16,6 +16,9 @@
         android:theme="@style/Theme.EasyHealthy"
         tools:targetApi="31">
         <activity
+            android:name=".ui.food.AddNewFoodActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.chi_so_co_the.AddChiSoCoTheDataActivity"
             android:exported="false" />
         <activity
