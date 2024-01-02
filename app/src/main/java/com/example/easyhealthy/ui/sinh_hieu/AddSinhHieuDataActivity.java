@@ -2,6 +2,7 @@ package com.example.easyhealthy.ui.sinh_hieu;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -78,6 +79,18 @@ public class AddSinhHieuDataActivity extends AppCompatActivity {
     }
 
     private void addEvents() {
+        Toolbar toolbar = findViewById(R.id.tb_chiTietDinhDuong);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("");
+        }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         tvNgayDatePikcer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

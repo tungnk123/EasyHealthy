@@ -5,6 +5,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,8 +20,12 @@ import com.example.easyhealthy.adapter.ListWithNoImageAdapter;
 import com.example.easyhealthy.adapter.SinhHieuAdapter;
 import com.example.easyhealthy.databinding.ActivitySinhHieuBinding;
 import com.example.easyhealthy.model.HoatDongData;
+import com.example.easyhealthy.model.NutritionData;
 import com.example.easyhealthy.ui.nutrition.AddNewNutritionActivity;
 import com.example.easyhealthy.ui.nutrition.DetailedNutritionActivity;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,6 +45,8 @@ public class SinhHieuActivity extends AppCompatActivity {
     List<String> dataSet;
 
     Button btnThemSinhHieu;
+
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
@@ -81,8 +88,12 @@ public class SinhHieuActivity extends AppCompatActivity {
     void addControls() {
         rcvAllSinhHieu = (RecyclerView) findViewById(R.id.rcv_allSinhHieu);
         rcvSinhHieuHistory = (RecyclerView) findViewById(R.id.rcv_sinhHieuHistory);
-
-        dataSet = Arrays.asList("Đường huyết","Oxi trong máu", "Thân nhiệt", "Nhịp tim", "Tần số hô hấp");
+        dataSet = new ArrayList<>();
+        dataSet.add("Đường huyết");
+        dataSet.add("Oxi trong máu");
+        dataSet.add("Thân nhiệt");
+        dataSet.add("Nhịp tim");
+        dataSet.add("Tần số hô hấp");
         listWithNoImageAdapter = new ListWithNoImageAdapter(dataSet);
         listWithNoImageAdapter.setOnItemClickListener(new ListWithNoImageAdapter.OnItemClickListener() {
             @Override
@@ -168,5 +179,18 @@ public class SinhHieuActivity extends AppCompatActivity {
                 launcher.launch(new Intent(getApplicationContext(), AddNewSinhHieuActivity.class));
             }
         });
+        Toolbar toolbar = findViewById(R.id.tb_dinhDuong);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("");
+        }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
     }
 }
