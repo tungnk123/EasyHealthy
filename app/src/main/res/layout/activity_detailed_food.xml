@@ -171,7 +171,7 @@
             android:layout_marginEnd="30dp"
             android:background="@drawable/background_rounded"
             android:padding="20dp"
-            android:text="Canxi là một khoáng chất có trong nhiều loại thực phẩm. Hầu hết canxi trong cơ thể bạn được tích trữ trong xương và răng để giữ cho chúng luôn chắc khỏe. Cơ thể của bạn cần canxi để giúp cơ bắp và mạch máu co giãn để truyền thông tin trong toàn bộ hệ thần kinh. Canxi cũng được sử dụng để giúp giải phóng hooc-môn và enzym có ảnh hưởng đến hầu hết mọi chức năng trong cơ thể người."
+            android:text="Ứng dụng theo dõi dinh dưỡng cung cấp trải nghiệm đơn giản và hiệu quả. Theo dõi và ghi chép ăn uống một cách dễ dàng, tính toán calo và chất dinh dưỡng tự động, giúp người dùng duy trì lối sống lành mạnh và đạt được mục tiêu sức khỏe của họ. Đồng thời, hỗ trợ bằng lịch trình, nhắc nhở và thông tin tư vấn dinh dưỡng."
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

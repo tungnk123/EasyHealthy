@@ -3,6 +3,7 @@ package com.example.easyhealthy.ui.nutrition;
 import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -160,6 +161,19 @@ public class DetailedNutritionActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "button nam click", Toast.LENGTH_LONG).show();
                 updateUI("nam");
                 updateDataForChart("nam");
+            }
+        });
+
+        Toolbar toolbar = findViewById(R.id.tb_chiTietDinhDuong);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("");
+        }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }

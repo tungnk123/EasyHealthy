@@ -48,7 +48,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM", Locale.getDefault());
         String formattedDate = dateFormat.format(date);
         // Check if date is today or not
-        if (date.equals(new Date())) {
+        if (formattedDate.equals(dateFormat.format(new Date()))) {
             holder.tvTime.setText(localDataSet[position].getTime());
         }
         else {
