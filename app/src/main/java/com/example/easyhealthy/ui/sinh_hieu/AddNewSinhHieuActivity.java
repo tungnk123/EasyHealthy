@@ -1,6 +1,7 @@
 package com.example.easyhealthy.ui.sinh_hieu;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,6 +46,19 @@ public class AddNewSinhHieuActivity extends AppCompatActivity {
                 intentBack.putExtra("TEN_DON_VI", edtTenDonviDo.getText().toString());
                 setResult(101, intentBack);
                 finish();
+            }
+        });
+
+        Toolbar toolbar = findViewById(R.id.tb_chiTietDinhDuong);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("");
+        }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }
