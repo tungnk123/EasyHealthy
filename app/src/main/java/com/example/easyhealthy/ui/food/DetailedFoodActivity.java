@@ -15,6 +15,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +56,8 @@ public class DetailedFoodActivity extends AppCompatActivity {
     TextView tvHeading1;
 
     RecyclerView rcvChiTietDinhDuong;
+
+    ImageView imgGioiThieu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,22 +105,31 @@ public class DetailedFoodActivity extends AppCompatActivity {
         tvHeading2 = (TextView) findViewById(R.id.tv_detailedFood_heading2);
         tvTrungBinh = (TextView) findViewById(R.id.tv_detailedFood_trungBinh);
         tvHeading1 = (TextView) findViewById(R.id.tv_detailedFood_heading);
-
+        imgGioiThieu = findViewById(R.id.img_gioiThieu);
         Intent intent = getIntent();
         tvHeading1.setText(intent.getStringExtra("title"));
+        List<Pair<String, Integer>> nutritionList = null;
 
         // hard code
         if (tvHeading1.getText().toString().equals("Bánh mì")) {
             tvDonViDo.setText("ổ");
+            imgGioiThieu.setImageResource(R.drawable.img_banhmi);
+            nutritionList = Arrays.asList(new Pair<String, Integer>("Canxi", 20), new Pair<String, Integer>("Vitamin A", 30));
         }
         else if (tvHeading1.getText().toString().equals("Phở")) {
             tvDonViDo.setText("tô");
+            imgGioiThieu.setImageResource(R.drawable.img_pho);
+            nutritionList = Arrays.asList(new Pair<String, Integer>("Canxi", 50), new Pair<String, Integer>("Vitamin A", 80), new Pair<String, Integer>("Chất đạm", 100), new Pair<String, Integer>("Chất béo", 80));
+
         }
         else if (tvHeading1.getText().toString().equals("Cơm sườn")) {
             tvDonViDo.setText("bát");
+            imgGioiThieu.setImageResource(R.drawable.img_comsuon);
+            nutritionList = Arrays.asList(new Pair<String, Integer>("Chất xơ", 20), new Pair<String, Integer>("Vitamin A", 30), new Pair<String, Integer>("Chất đạm", 80));
+
+
         }
         rcvChiTietDinhDuong = (RecyclerView) findViewById(R.id.rcv_chiTietDinhDuongRcv);
-        List<Pair<String, Integer>> nutritionList = Arrays.asList(new Pair<String, Integer>("Canxi", 20), new Pair<String, Integer>("Vitamin A", 30));
         FoodNutritionAdapter foodNutritionAdapter = new FoodNutritionAdapter(nutritionList);
         rcvChiTietDinhDuong.setAdapter(foodNutritionAdapter);
         rcvChiTietDinhDuong.setLayoutManager(new LinearLayoutManager(this));
