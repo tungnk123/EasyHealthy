@@ -11,9 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.easyhealthy.R;
 import com.example.easyhealthy.model.DuyetItem;
+import com.example.easyhealthy.model.HoatDongData;
+
+import java.util.List;
 
 public class NguyCoAdapter extends RecyclerView.Adapter<NguyCoAdapter.ListItemHolder> {
-    private final DuyetItem[] localDataSet;
+    private final List<HoatDongData> localDataSet;
     private OnItemClickListener mListener;
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -22,7 +25,7 @@ public class NguyCoAdapter extends RecyclerView.Adapter<NguyCoAdapter.ListItemHo
 
 
 
-    public NguyCoAdapter(DuyetItem[] dataSet) {
+    public NguyCoAdapter(List<HoatDongData> dataSet) {
         localDataSet = dataSet;
     }
     @NonNull
@@ -36,35 +39,40 @@ public class NguyCoAdapter extends RecyclerView.Adapter<NguyCoAdapter.ListItemHo
 
     @Override
     public void onBindViewHolder(@NonNull ListItemHolder holder, int position) {
-        holder.tvTitle.setText(localDataSet[position].getTitle());
-        holder.imageView.setImageResource(localDataSet[position].getIcon());
+        holder.tvTitle.setText(localDataSet.get(position).getTitle());
+        holder.imageView.setImageResource(localDataSet.get(position).getIcon());
+        holder.tvNumber.setText(String.valueOf(localDataSet.get(position).getNumber()));
+        holder.tvDonViDo.setText(localDataSet.get(position).getDonViDo());
         holder.itemView.setOnClickListener(v -> {
             if (mListener != null) {
-                mListener.onItemClick(localDataSet[position]);
+                mListener.onItemClick(localDataSet.get(position));
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return localDataSet.length;
+        return localDataSet.size();
     }
 
     public static class ListItemHolder extends RecyclerView.ViewHolder {
         private final TextView tvTitle;
         private final TextView tvNumber;
         private final ImageView imageView;
+
+        TextView tvDonViDo;
         public ListItemHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
             imageView = (ImageView) view.findViewById(R.id.img_startIcon);
             tvTitle = (TextView) view.findViewById(R.id.tv_itemTitle);
             tvNumber = (TextView) view.findViewById(R.id.tv_itemNumber);
+            tvDonViDo = view.findViewById(R.id.tv_itemDonViDo);
         }
 
     }
     public interface OnItemClickListener {
-        void onItemClick(DuyetItem item);
+        void onItemClick(HoatDongData item);
     }
 
 }

@@ -189,6 +189,8 @@ public class ChiTietSinhHieuActivity extends AppCompatActivity {
                 updateDataForChart("nam");
             }
         });
+
+
     }
 
     private void updateDataForChart(String type) {

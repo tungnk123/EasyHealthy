@@ -1,17 +1,24 @@
 package com.example.easyhealthy.ui.chi_so_co_the;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.easyhealthy.R;
 import com.example.easyhealthy.adapter.HoatDongAdapter;
 import com.example.easyhealthy.adapter.ListWithNoImageAdapter;
 import com.example.easyhealthy.model.HoatDongData;
+import com.example.easyhealthy.model.NutritionData;
 import com.example.easyhealthy.ui.hoatdong.ChiTietHoatDongActivity;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,12 +36,16 @@ public class ChiSoCoTheActivity extends AppCompatActivity {
     List<HoatDongData> hoatDongHistoryList;
 
     List<String> dataSet;
+
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chi_so_co_the);
         addControls();
         addEvents();
+        updateDataInRcv();
+        updateBMI();
     }
 
     void addControls() {
@@ -123,7 +134,18 @@ public class ChiSoCoTheActivity extends AppCompatActivity {
     }
 
     void addEvents() {
+        Toolbar toolbar = findViewById(R.id.tb_dinhDuong);
+        setSupportActionBar(toolbar);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("");
+        }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
     private void addMotaChieuCaoCanNang(Intent intent, String item) {
         switch (item) {
@@ -147,5 +169,43 @@ public class ChiSoCoTheActivity extends AppCompatActivity {
 
         }
     }
+    public void updateDataInRcv() {
+        firestore.collection("Chiều cao")
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        HoatDongData data = new  HoatDongData(document);
+                        hoatDongHistoryList.set(0, new HoatDongData("Chiều cao", R.drawable.ic_height, data.getNumber(), "Kg"));
+                        hoatDongAdapter.notifyDataSetChanged();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                });
+        firestore.collection("Cân nặng")
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        HoatDongData data = new  HoatDongData(document);
+                        hoatDongHistoryList.set(1, new HoatDongData("Cân nặng", R.drawable.ic_height, data.getNumber(), "Kg"));
+                        hoatDongAdapter.notifyDataSetChanged();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                });
 
+
+    }
+
+    void updateBMI() {
+        int canNang = hoatDongHistoryList.get(1).getNumber();
+        float chieuCao = (float) hoatDongHistoryList.get(0).getNumber() / 100;
+
+        float bmi = canNang / (chieuCao * chieuCao);
+        TextView tvBMIValue = findViewById(R.id.tv_valueBMI);
+        tvBMIValue.setText(String.valueOf((int)bmi));
+    }
 }
