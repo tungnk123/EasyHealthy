@@ -34,7 +34,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_addDetailNutrition"
+            android:id="@+id/btn_addSinhHieu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -45,7 +45,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <EditText
-        android:id="@+id/edt_tenThucAn"
+        android:id="@+id/edt_tenSinhHieu"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="30dp"
@@ -75,7 +75,7 @@
         android:paddingTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_tenThucAn" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_tenSinhHieu" />
 
     <EditText
         android:id="@+id/edt_tenDonViDo"

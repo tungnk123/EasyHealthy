@@ -147,7 +147,30 @@
             app:layout_constraintBottom_toBottomOf="@+id/tv_detailedFood_trungBinh"
             app:layout_constraintStart_toEndOf="@+id/tv_detailedFood_trungBinh"
             app:layout_constraintTop_toTopOf="@+id/tv_detailedFood_trungBinh" />
+        <TextView
+            android:id="@+id/tv_detailedFood_imageTitle"
+            style="@style/heading2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:text="Hình ảnh thức ăn"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chart" />
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/img_banhmi"
+            android:layout_marginTop="20dp"
+            android:id="@+id/img_gioiThieu"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_detailedFood_imageTitle"/>
         <TextView
             android:id="@+id/tv_detailedFood_gioiThieu"
             style="@style/heading2"
@@ -159,7 +182,7 @@
             android:text="Mô tả thức ăn"
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chart" />
+            app:layout_constraintTop_toBottomOf="@+id/img_gioiThieu" />
 
         <TextView
             android:id="@+id/tv_detailedFood_noiDungGioiThieu"
@@ -171,7 +194,7 @@
             android:layout_marginEnd="30dp"
             android:background="@drawable/background_rounded"
             android:padding="20dp"
-            android:text="Canxi là một khoáng chất có trong nhiều loại thực phẩm. Hầu hết canxi trong cơ thể bạn được tích trữ trong xương và răng để giữ cho chúng luôn chắc khỏe. Cơ thể của bạn cần canxi để giúp cơ bắp và mạch máu co giãn để truyền thông tin trong toàn bộ hệ thần kinh. Canxi cũng được sử dụng để giúp giải phóng hooc-môn và enzym có ảnh hưởng đến hầu hết mọi chức năng trong cơ thể người."
+            android:text="Ứng dụng theo dõi dinh dưỡng cung cấp trải nghiệm đơn giản và hiệu quả. Theo dõi và ghi chép ăn uống một cách dễ dàng, tính toán calo và chất dinh dưỡng tự động, giúp người dùng duy trì lối sống lành mạnh và đạt được mục tiêu sức khỏe của họ. Đồng thời, hỗ trợ bằng lịch trình, nhắc nhở và thông tin tư vấn dinh dưỡng."
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

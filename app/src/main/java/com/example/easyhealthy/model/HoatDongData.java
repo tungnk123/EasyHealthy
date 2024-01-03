@@ -1,5 +1,8 @@
 package com.example.easyhealthy.model;
 
+import com.example.easyhealthy.R;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
 public class HoatDongData {
     private String title;
     private int icon;
@@ -12,6 +15,13 @@ public class HoatDongData {
         this.icon = icon;
         this.number = number;
         this.donViDo = donViDo;
+    }
+
+    public HoatDongData(QueryDocumentSnapshot document) {
+        this.title = document.getString("title");
+        this.icon = R.drawable.ic_fire;
+        this.number = document.getLong("quantity").intValue();
+        this.donViDo = "calo";
     }
 
     public String getTitle() {

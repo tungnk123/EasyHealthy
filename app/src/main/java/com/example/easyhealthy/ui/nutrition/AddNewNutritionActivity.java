@@ -2,7 +2,6 @@ package com.example.easyhealthy.ui.nutrition;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,10 +29,10 @@ public class AddNewNutritionActivity extends AppCompatActivity {
     }
 
     private void addControls() {
-        edtTenChatDinhDuong = (EditText) findViewById(R.id.edt_tenThucAn);
+        edtTenChatDinhDuong = (EditText) findViewById(R.id.edt_tenSinhHieu);
         edtMoTa = (EditText) findViewById(R.id.edt_moTa);
         edtTenDonviDo = (EditText) findViewById(R.id.edt_tenDonViDo);
-        btnThem = (Button) findViewById(R.id.btn_addDetailNutrition);
+        btnThem = (Button) findViewById(R.id.btn_addSinhHieu);
     }
 
     private void addEvents() {

@@ -45,7 +45,7 @@ public class FoodNutritionAdapter extends RecyclerView.Adapter<FoodNutritionAdap
         public FoodNutritionViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitleNutrition = (TextView) itemView.findViewById(R.id.tv_nutritionFoodItem_title);
-            tvLuuLuong = (TextView) itemView.findViewById(R.id.tv_nutritionFoodItem_value);
+            tvLuuLuong = (TextView) itemView.findViewById(R.id.sp_chat2);
         }
     }
 }

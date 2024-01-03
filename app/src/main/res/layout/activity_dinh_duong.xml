@@ -35,6 +35,7 @@
                     android:text="Dinh dưỡng" />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
+
         <TextView
             android:id="@+id/tv_currentFood"
             style="@style/heading3"
@@ -42,10 +43,21 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
-            android:text="Danh sách thức ăn hiện có"
+            android:text="Danh sách thức ăn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tb_dinhDuong" />
 
+        <Button
+            android:id="@+id/btn_addThucAn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:background="@android:color/transparent"
+            android:text="Thêm"
+            android:textColor="@color/blue_300"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_currentFood"
+            app:layout_constraintEnd_toEndOf="parent" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_curFood"
             android:layout_width="match_parent"
@@ -57,27 +69,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_currentFood" />
 
-        <TextView
-            android:id="@+id/tv_historyFood"
-            style="@style/heading3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:text="Lịch sử ăn uống"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rcv_curFood" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_baiBao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_historyFood" />
         <TextView
             android:id="@+id/tv_historyNutrition"
             style="@style/heading3"
@@ -87,7 +79,7 @@
             android:layout_marginTop="30dp"
             android:text="Lịch sử dinh dưỡng"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rcv_baiBao" />
+            app:layout_constraintTop_toBottomOf="@+id/rcv_curFood" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_dinhDuong_historyNutrition"
@@ -112,7 +104,7 @@
             app:layout_constraintTop_toBottomOf="@+id/rcv_dinhDuong_historyNutrition" />
 
         <Button
-            android:id="@+id/btn_addNewNutrition"
+            android:id="@+id/btn_addNewSinhHieu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

@@ -2,6 +2,7 @@ package com.example.easyhealthy.ui.food;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -64,7 +65,7 @@ public class AddFoodActivity extends AppCompatActivity {
         String formattedDate = dateFormat.format(currentDate);
         tvNgayDatePikcer.setText(formattedDate);
 
-        btnAdd = (Button) findViewById(R.id.btn_addDetailNutrition);
+        btnAdd = (Button) findViewById(R.id.btn_addSinhHieu);
         edtSoLuong = (EditText) findViewById(R.id.edt_soLuong);
         tvHeading = (TextView) findViewById(R.id.tv_detailedFood_heading);
 
@@ -83,6 +84,18 @@ public class AddFoodActivity extends AppCompatActivity {
     }
 
     private void addEvents() {
+        Toolbar toolbar = findViewById(R.id.tb_chiTietDinhDuong);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("");
+        }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         tvNgayDatePikcer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

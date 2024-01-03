@@ -29,12 +29,12 @@
                 <TextView
                     android:id="@+id/tv_detailedFood_heading"
                     style="@style/heading2"
-                    android:textSize="18sp"
                     android:layout_width="100dp"
-                    android:gravity="center"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:text="Canxi" />
+                    android:gravity="center"
+                    android:text="Canxi"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -168,7 +168,7 @@
             android:layout_marginEnd="30dp"
             android:background="@drawable/background_rounded"
             android:padding="20dp"
-            android:text="Canxi là một khoáng chất có trong nhiều loại thực phẩm. Hầu hết canxi trong cơ thể bạn được tích trữ trong xương và răng để giữ cho chúng luôn chắc khỏe. Cơ thể của bạn cần canxi để giúp cơ bắp và mạch máu co giãn để truyền thông tin trong toàn bộ hệ thần kinh. Canxi cũng được sử dụng để giúp giải phóng hooc-môn và enzym có ảnh hưởng đến hầu hết mọi chức năng trong cơ thể người."
+            android:text="Chất dinh dưỡng là những hợp chất cần thiết mà cơ thể con người cần để duy trì sức khỏe và hoạt động bình thường. Các chất dinh dưỡng chủ yếu bao gồm protein, chất béo, carbohydrate, vitamin, và khoáng chất. Protein cần thiết cho sự phát triển cơ bắp và sửa chữa tế bào, chất béo cung cấp năng lượng, carbohydrate là nguồn năng lượng chính, vitamin và khoáng chất hỗ trợ nhiều chức năng sinh học trong cơ thể. "
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

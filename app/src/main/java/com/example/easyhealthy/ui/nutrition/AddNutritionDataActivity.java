@@ -63,7 +63,7 @@ public class AddNutritionDataActivity extends AppCompatActivity {
         String formattedDate = dateFormat.format(currentDate);
         tvNgayDatePikcer.setText(formattedDate);
 
-        btnAdd = (Button) findViewById(R.id.btn_addDetailNutrition);
+        btnAdd = (Button) findViewById(R.id.btn_addSinhHieu);
         edtLuuLuong = (EditText) findViewById(R.id.edt_soLuong);
         tvHeading = (TextView) findViewById(R.id.tv_detailedFood_heading);
 

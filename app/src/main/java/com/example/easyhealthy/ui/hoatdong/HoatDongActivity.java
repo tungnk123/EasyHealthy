@@ -1,19 +1,22 @@
 package com.example.easyhealthy.ui.hoatdong;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.easyhealthy.R;
 import com.example.easyhealthy.adapter.HoatDongAdapter;
 import com.example.easyhealthy.adapter.ListWithNoImageAdapter;
-import com.example.easyhealthy.model.DuyetItem;
 import com.example.easyhealthy.model.HoatDongData;
-import com.example.easyhealthy.ui.food.DetailedFoodActivity;
-import com.example.easyhealthy.ui.nutrition.DetailedNutritionActivity;
+import com.example.easyhealthy.model.NutritionData;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,17 +34,20 @@ public class HoatDongActivity extends AppCompatActivity {
     List<HoatDongData> hoatDongHistoryList;
 
     List<String> dataSet;
+
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hoat_dong);
         addControls();
         addEvents();
+//        updateDataInRcv();
     }
 
     void addControls() {
-        rcvAllHoatDong = (RecyclerView) findViewById(R.id.rcv_allHoatDong);
-        rcvHoatDongHistory = (RecyclerView) findViewById(R.id.rcv_hoatDongHistory);
+        rcvAllHoatDong = (RecyclerView) findViewById(R.id.rcv_allSinhHieu);
+        rcvHoatDongHistory = (RecyclerView) findViewById(R.id.rcv_sinhHieuHistory);
 
         dataSet = Arrays.asList("Quãng đường chạy bộ", "Calories tiêu thụ", "Số phút thể dục", "Khoảng cách bơi", "Số phút di chuyển", "Số phút đứng");
         listWithNoImageAdapter = new ListWithNoImageAdapter(dataSet);
@@ -122,6 +128,57 @@ public class HoatDongActivity extends AppCompatActivity {
     }
 
     void addEvents() {
+        Toolbar toolbar = findViewById(R.id.tb_dinhDuong);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("");
+        }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+    }
+
+    public void updateDataInRcv() {
+        firestore.collection("Calories tiêu thụ")
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        hoatDongHistoryList.set(0, new HoatDongData(document));
+                        hoatDongAdapter.notifyDataSetChanged();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                });
+        firestore.collection("Quãng đường chạy bộ")
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        hoatDongHistoryList.set(1, new HoatDongData(document));
+                       hoatDongAdapter.notifyDataSetChanged();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                });
+        firestore.collection("Số phút thể dục")
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        hoatDongHistoryList.set(2, new HoatDongData(document));
+                        hoatDongAdapter.notifyDataSetChanged();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                });
 
     }
 }

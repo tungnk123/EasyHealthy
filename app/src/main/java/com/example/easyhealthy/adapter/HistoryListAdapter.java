@@ -11,9 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.easyhealthy.R;
 import com.example.easyhealthy.model.DuyetItem;
+import com.example.easyhealthy.model.NutritionData;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.ListItemHolder> {
-    private final DuyetItem[] localDataSet;
+    private final NutritionData[] localDataSet;
     private OnItemClickListener mListener;
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -22,7 +27,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
 
 
 
-    public HistoryListAdapter(DuyetItem[] dataSet) {
+    public HistoryListAdapter(NutritionData[] dataSet) {
         localDataSet = dataSet;
     }
     @NonNull
@@ -36,8 +41,19 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ListItemHolder holder, int position) {
-        holder.textView.setText(localDataSet[position].getTitle());
-        holder.imageView.setImageResource(localDataSet[position].getIcon());
+        holder.tvTitle.setText(localDataSet[position].getType());
+        holder.tvNumber.setText(String.valueOf(localDataSet[position].getQuantity()));
+
+        Date date = localDataSet[position].getDate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM", Locale.getDefault());
+        String formattedDate = dateFormat.format(date);
+        // Check if date is today or not
+        if (formattedDate.equals(dateFormat.format(new Date()))) {
+            holder.tvTime.setText(localDataSet[position].getTime());
+        }
+        else {
+            holder.tvTime.setText(formattedDate);
+        }
         holder.itemView.setOnClickListener(v -> {
             if (mListener != null) {
                 mListener.onItemClick(localDataSet[position]);
@@ -51,21 +67,22 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
     }
 
     public static class ListItemHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
-        private final ImageView imageView;
+        private final TextView tvTitle;
+        private final TextView tvNumber;
+
+        private final TextView tvTime;
         public ListItemHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
-            imageView = (ImageView) view.findViewById(R.id.img_startIcon);
-            textView = (TextView) view.findViewById(R.id.tv_itemTitle);
+            tvTitle = (TextView) view.findViewById(R.id.tv_itemTitle);
+            tvNumber = view.findViewById(R.id.tv_itemNumber);
+            tvTime = view.findViewById(R.id.tv_itemTime);
+
         }
 
-        public TextView getTextView() {
-            return textView;
-        }
     }
     public interface OnItemClickListener {
-        void onItemClick(DuyetItem item);
+        void onItemClick(NutritionData item);
     }
 
 }
