@@ -16,6 +16,19 @@
         android:theme="@style/Theme.EasyHealthy"
         tools:targetApi="31">
         <activity
+            android:name=".ui.logIn_signUp.LogInAndSignUpActivity"
+            android:exported="true"
+            android:label="@string/app_name">
+
+            <!-- Thêm intent-filter mới cho activity này -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>        <activity
+            android:name=".ui.logIn_signUp.LogInActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.food.AddNewFoodActivity"
             android:exported="false" />
         <activity
@@ -68,14 +81,8 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"
+            android:label="@string/app_name" />
 
         <meta-data
             android:name="preloaded_fonts"

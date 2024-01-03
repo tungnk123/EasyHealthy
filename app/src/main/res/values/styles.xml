@@ -56,5 +56,16 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="app_name_1" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="app_name_2" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/blue_300</item>
+    </style>
 
 </resources>
