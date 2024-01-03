@@ -51,6 +51,20 @@
         android:layout_weight="1" />
 
     <TextView
+        android:id="@+id/tv_itemDonViDo"
+        style="@style/large_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_weight="1"
+        android:text="mg"
+        android:layout_marginStart="10dp"
+        android:textColor="@android:color/holo_red_light"
+        app:layout_constraintStart_toEndOf="@+id/tv_itemNumber"
+        app:layout_constraintTop_toBottomOf="@+id/tv_itemTitle" />
+
+    <TextView
         android:id="@+id/tv_itemTime"
         style="@style/list_item"
         android:layout_width="0dp"
