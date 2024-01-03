@@ -16,4 +16,7 @@
     <color name="gray_200">#DDDADA</color>
     <color name="green_200">#71EA66</color>
     <color name="border_color">#F7F8F8</color>
+    <color name="gray_100">#ada4a5</color>
+    <color name="pink_purple">#ca8eec</color>
+
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.logIn_signUp.LogInAndSignUpActivity">
+    tools:context=".ui.logIn_signUp.StartUpActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/top_component"
@@ -68,6 +68,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
@@ -75,6 +76,7 @@
             android:background="@drawable/button_gradient_rounded_login"/>
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Đăng ký"
