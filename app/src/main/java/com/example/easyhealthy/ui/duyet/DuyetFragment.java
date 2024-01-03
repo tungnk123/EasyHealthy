@@ -44,7 +44,6 @@ public class DuyetFragment extends Fragment {
                 new DuyetItem("Lượng nước", R.drawable.ic_water),
                 new DuyetItem("Sinh hiệu", R.drawable.ic_sinhhieu),
                 new DuyetItem("Ngủ", R.drawable.ic_bed),
-                new DuyetItem("Triệu chứng", R.drawable.ic_trieuchung),
                 new DuyetItem("Hoạt động", R.drawable.ic_fire),
                 new DuyetItem("Số đo cơ thể", R.drawable.ic_body),
 
