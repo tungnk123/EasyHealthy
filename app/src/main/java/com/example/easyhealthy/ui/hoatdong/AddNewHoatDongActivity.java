@@ -46,8 +46,13 @@ public class AddNewHoatDongActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_hoat_dong);
-        addControls();
-        addEvents();
+        try {
+            addControls();
+            addEvents();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void addControls() {
@@ -126,25 +131,33 @@ public class AddNewHoatDongActivity extends AppCompatActivity {
 
                 // Format the date to create the Firestore document ID
 
-
+                if (type.isEmpty() ) {
+                    return;
+                }
                 NutritionData nutritionData = new NutritionData(type, parsedDate, time, quantity);
+                try {
+                    firestore.collection(type)
+                            .add(nutritionData)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Toast.makeText(getApplicationContext(), "Save canxi successfully", Toast.LENGTH_LONG).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext(), "Save canxi failed", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                    startActivity(new Intent(getApplicationContext(), DetailedNutritionActivity.class));
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
 
-                firestore.collection(type)
-                        .add(nutritionData)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(getApplicationContext(), "Save canxi successfully", Toast.LENGTH_LONG).show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getApplicationContext(), "Save canxi failed", Toast.LENGTH_LONG).show();
-                            }
-                        });
 
-                startActivity(new Intent(getApplicationContext(), DetailedNutritionActivity.class));
+
             }
         });
     }

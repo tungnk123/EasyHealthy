@@ -45,8 +45,13 @@ public class ThemGiacNguDataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_giac_ngu_data);
-        addControls();
-        addEvents();
+        try {
+            addControls();
+            addEvents();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void addControls() {
@@ -147,25 +152,33 @@ public class ThemGiacNguDataActivity extends AppCompatActivity {
 
                 // Convert sleep duration from milliseconds to minutes
                 int sleepDurationInMinutes = (int) (sleepDurationInMillis / (3600 * 1000));
+                if (type.isEmpty() ) {
+                    return;
+                }
 
                 NutritionData nutritionData = new NutritionData(type, parsedDate, timeNgu , sleepDurationInMinutes);
 
-                firestore.collection(type)
-                        .add(nutritionData)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(getApplicationContext(), "Save canxi successfully", Toast.LENGTH_LONG).show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getApplicationContext(), "Save canxi failed", Toast.LENGTH_LONG).show();
-                            }
-                        });
+                try {
+                    firestore.collection(type)
+                            .add(nutritionData)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Toast.makeText(getApplicationContext(), "Save canxi successfully", Toast.LENGTH_LONG).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext(), "Save canxi failed", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                    startActivity(new Intent(getApplicationContext(), DetailedNutritionActivity.class));
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-                startActivity(new Intent(getApplicationContext(), DetailedNutritionActivity.class));
             }
         });
     }

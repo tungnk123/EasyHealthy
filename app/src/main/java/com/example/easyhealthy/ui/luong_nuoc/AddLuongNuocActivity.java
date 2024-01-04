@@ -43,8 +43,13 @@ public class AddLuongNuocActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_luong_nuoc);
-        addControls();
-        addEvents();
+        try {
+            addControls();
+            addEvents();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void addControls() {
@@ -107,25 +112,33 @@ public class AddLuongNuocActivity extends AppCompatActivity {
 
                 // Format the date to create the Firestore document ID
 
-
+                if (type.isEmpty() ) {
+                    return;
+                }
                 NutritionData nutritionData = new NutritionData(type, parsedDate, time, quantity);
 
-                firestore.collection(type)
-                        .add(nutritionData)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(getApplicationContext(), "Save canxi successfully", Toast.LENGTH_LONG).show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getApplicationContext(), "Save canxi failed", Toast.LENGTH_LONG).show();
-                            }
-                        });
+                try {
+                    firestore.collection(type)
+                            .add(nutritionData)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Toast.makeText(getApplicationContext(), "Save canxi successfully", Toast.LENGTH_LONG).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext(), "Save canxi failed", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                    startActivity(new Intent(getApplicationContext(), DetailedNutritionActivity.class));
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-                startActivity(new Intent(getApplicationContext(), DetailedNutritionActivity.class));
+
             }
         });
     }

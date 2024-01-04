@@ -38,8 +38,13 @@ public class AddNewFoodActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        addControls();
-        addEvents();
+        try {
+            addControls();
+            addEvents();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void addControls() {
