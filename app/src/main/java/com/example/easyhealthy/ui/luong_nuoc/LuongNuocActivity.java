@@ -204,7 +204,6 @@ public class LuongNuocActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                                 NutritionData nutritionData = new NutritionData(documentSnapshot);
                                 entries.add(new BarEntry(Integer.parseInt(nutritionData.getTime().substring(0, 2)), nutritionData.getQuantity()));
-                                Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
                             }
                             updateChart(entries, xAxis, "Lưu lượng "+ tvHeading1.getText().toString() + " trong ngày", "ngay");
                         })
@@ -226,7 +225,6 @@ public class LuongNuocActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                                 NutritionData nutritionData = new NutritionData(documentSnapshot);
                                 entries.add(new BarEntry(nutritionData.getDate().getDay(), nutritionData.getQuantity()));
-                                Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
                             }
                             updateChart(entries, xAxis, "Lưu lượng "+ tvHeading1.getText().toString() + " trong tuần", "tuan");
                         })
@@ -249,7 +247,6 @@ public class LuongNuocActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                                 NutritionData nutritionData = new NutritionData(documentSnapshot);
                                 entries.add(new BarEntry(nutritionData.getDate().getDate(), nutritionData.getQuantity()));
-                                Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
                             }
                             updateChart(entries, xAxis, "Lưu lượng "+ tvHeading1.getText().toString() + " trong tháng", "thang");
                         })
@@ -274,7 +271,6 @@ public class LuongNuocActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                                 NutritionData nutritionData = new NutritionData(documentSnapshot);
                                 entries.add(new BarEntry(nutritionData.getDate().getMonth() + 1, nutritionData.getQuantity()));
-                                Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
                             }
                             updateChart(entries, xAxis, "Lưu lượng "+ tvHeading1.getText().toString() + " trong năm", "nam");
                         })
