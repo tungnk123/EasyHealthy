@@ -139,7 +139,6 @@ public class ChiTietSinhHieuActivity extends AppCompatActivity {
                 btnTuan.setBackground(drawableNotSelected);
                 btnThang.setBackground(drawableNotSelected);
                 btnNam.setBackground(drawableNotSelected);
-                Toast.makeText(getApplicationContext(), "button ngay click", Toast.LENGTH_LONG).show();
                 updateUI("ngay");
                 updateDataForChart("ngay");
             }
@@ -154,7 +153,6 @@ public class ChiTietSinhHieuActivity extends AppCompatActivity {
                 btnNgay.setBackground(drawableNotSelected);
                 btnThang.setBackground(drawableNotSelected);
                 btnNam.setBackground(drawableNotSelected);
-                Toast.makeText(getApplicationContext(), "button tuan click", Toast.LENGTH_LONG).show();
                 updateUI("tuan");
                 updateDataForChart("tuan");
             }
@@ -169,7 +167,6 @@ public class ChiTietSinhHieuActivity extends AppCompatActivity {
                 btnNgay.setBackground(drawableNotSelected);
                 btnTuan.setBackground(drawableNotSelected);
                 btnNam.setBackground(drawableNotSelected);
-                Toast.makeText(getApplicationContext(), "button thang click", Toast.LENGTH_LONG).show();
                 updateUI("thang");
                 updateDataForChart("thang");
             }
@@ -184,7 +181,6 @@ public class ChiTietSinhHieuActivity extends AppCompatActivity {
                 btnNgay.setBackground(drawableNotSelected);
                 btnThang.setBackground(drawableNotSelected);
                 btnTuan.setBackground(drawableNotSelected);
-                Toast.makeText(getApplicationContext(), "button nam click", Toast.LENGTH_LONG).show();
                 updateUI("nam");
                 updateDataForChart("nam");
             }
@@ -222,7 +218,6 @@ public class ChiTietSinhHieuActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                                 NutritionData nutritionData = new NutritionData(documentSnapshot);
                                 entries.add(new BarEntry(Integer.parseInt(nutritionData.getTime().substring(0, 2)), nutritionData.getQuantity()));
-                                Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
                             }
                             updateChart(entries, xAxis, tvHeading1.getText().toString() + " trong ngày", "ngay");
                         })
@@ -244,7 +239,6 @@ public class ChiTietSinhHieuActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                                 NutritionData nutritionData = new NutritionData(documentSnapshot);
                                 entries.add(new BarEntry(nutritionData.getDate().getDay(), nutritionData.getQuantity()));
-                                Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
                             }
                             updateChart(entries, xAxis, tvHeading1.getText().toString() + " trong tuần", "tuan");
                         })
@@ -267,7 +261,6 @@ public class ChiTietSinhHieuActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                                 NutritionData nutritionData = new NutritionData(documentSnapshot);
                                 entries.add(new BarEntry(nutritionData.getDate().getDate(), nutritionData.getQuantity()));
-                                Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
                             }
                             updateChart(entries, xAxis,  tvHeading1.getText().toString() + " trong tháng", "thang");
                         })
@@ -292,7 +285,6 @@ public class ChiTietSinhHieuActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                                 NutritionData nutritionData = new NutritionData(documentSnapshot);
                                 entries.add(new BarEntry(nutritionData.getDate().getMonth() + 1, nutritionData.getQuantity()));
-                                Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
                             }
                             updateChart(entries, xAxis,  tvHeading1.getText().toString() + " trong năm", "nam");
                         })

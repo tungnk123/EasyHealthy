@@ -1,8 +1,7 @@
-package com.example.easyhealthy.ui.sinh_hieu;
+package com.example.easyhealthy.ui.giac_ngu;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -18,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.easyhealthy.R;
 import com.example.easyhealthy.model.NutritionData;
+import com.example.easyhealthy.ui.nutrition.DetailedNutritionActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -29,13 +29,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class AddSinhHieuDataActivity extends AppCompatActivity {
+public class ThemGiacNguDataActivity extends AppCompatActivity {
 
-    TextView tvNgayDatePikcer;
-    TextView tvGioTimePicker;
+    TextView tvNgayNguDatePikcer;
+    TextView tvNgayThucDatePikcer;
+    TextView tvGioNguTimePicker;
+    TextView tvGioThucTimePicker;
     TextView tvHeading;
-
-    TextView tvDonViTinh;
     Button btnAdd;
     EditText edtLuuLuong;
 
@@ -44,7 +44,7 @@ public class AddSinhHieuDataActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_hoat_dong);
+        setContentView(R.layout.activity_them_giac_ngu_data);
         try {
             addControls();
             addEvents();
@@ -55,21 +55,25 @@ public class AddSinhHieuDataActivity extends AppCompatActivity {
     }
 
     private void addControls() {
-        tvNgayDatePikcer = findViewById(R.id.tv_addFoodData_ngayTimePicker);
-        tvGioTimePicker = findViewById(R.id.tv_addFoodData_gioTimePicker);
+        tvNgayNguDatePikcer = findViewById(R.id.tv_addFoodData_ngayNguTimePicker);
+        tvNgayThucDatePikcer = findViewById(R.id.tv_addFoodData_ngayThucTimePicker);
+        tvGioNguTimePicker = findViewById(R.id.tv_addFoodData_gioNguTimePicker);
+        tvGioThucTimePicker = findViewById(R.id.tv_addFoodData_gioThucTimePicker);
 
         // Set current time
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
         String currentTime = String.format("%02d:%02d", hour, minute);
-        tvGioTimePicker.setText(currentTime);
+        tvGioNguTimePicker.setText(currentTime);
+        tvGioThucTimePicker.setText(currentTime);
 
         // Set current date
         Date currentDate = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String formattedDate = dateFormat.format(currentDate);
-        tvNgayDatePikcer.setText(formattedDate);
+        tvNgayNguDatePikcer.setText(formattedDate);
+        tvNgayThucDatePikcer.setText(formattedDate);
 
         btnAdd = (Button) findViewById(R.id.btn_addSinhHieu);
         edtLuuLuong = (EditText) findViewById(R.id.edt_soLuong);
@@ -77,63 +81,83 @@ public class AddSinhHieuDataActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         tvHeading.setText(intent.getStringExtra("title"));
-        tvDonViTinh = (TextView) findViewById(R.id.tv_donViTinh);
-        tvDonViTinh.setText(intent.getStringExtra("DON_VI_TINH"));
-
-        edtLuuLuong.setHint("Nhập " + tvDonViTinh.getText().toString());
     }
 
     private void addEvents() {
-        Toolbar toolbar = findViewById(R.id.tb_chiTietDinhDuong);
-        setSupportActionBar(toolbar);
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("");
-        }
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        tvNgayDatePikcer.setOnClickListener(new View.OnClickListener() {
+        tvNgayNguDatePikcer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog();
             }
         });
 
-        tvGioTimePicker.setOnClickListener(new View.OnClickListener() {
+        tvNgayThucDatePikcer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateThucPickerDialog();
+            }
+        });
+
+        tvGioNguTimePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showTimePickerDialog();
             }
         });
 
+        tvGioThucTimePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTimeGioThucPickerDialog();
+            }
+        });
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String type = tvHeading.getText().toString();
-                String date = tvNgayDatePikcer.getText().toString();
-                String time = tvGioTimePicker.getText().toString();
-                int quantity = Integer.parseInt(edtLuuLuong.getText().toString());
+                String dateNgu = tvNgayNguDatePikcer.getText().toString();
+                String dateThuc = tvNgayThucDatePikcer.getText().toString();
+                String timeNgu = tvGioNguTimePicker.getText().toString();
+                String timeThuc = tvGioThucTimePicker.getText().toString();
+
 
                 // Parse the date string into a Date object
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                 Date parsedDate = null;
 
                 try {
-                    parsedDate = dateFormat.parse(date);
+                    parsedDate = dateFormat.parse(dateNgu);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+                Calendar calTimeNgu = Calendar.getInstance();
+                Calendar calTimeThuc = Calendar.getInstance();
+                try {
+                    calTimeNgu.setTime(timeFormat.parse(timeNgu));
+                    Date date1 = dateFormat.parse(dateNgu);
+                    calTimeNgu.set(date1.getYear(), date1.getMonth(), date1.getDay());
+                    calTimeThuc.setTime(timeFormat.parse(timeThuc));
+                    Date date2 = dateFormat.parse(dateThuc);
+                    calTimeThuc.set(date2.getYear(), date2.getMonth(), date2.getDay());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
 
-                // Format the date to create the Firestore document ID
+                long timeNguInMillis = calTimeNgu.getTimeInMillis();
+                long timeThucInMillis = calTimeThuc.getTimeInMillis();
 
+
+                long sleepDurationInMillis = timeThucInMillis - timeNguInMillis;
+
+                // Convert sleep duration from milliseconds to minutes
+                int sleepDurationInMinutes = (int) (sleepDurationInMillis / (3600 * 1000));
                 if (type.isEmpty() ) {
                     return;
                 }
-                NutritionData nutritionData = new NutritionData(type, parsedDate, time, quantity);
+
+                NutritionData nutritionData = new NutritionData(type, parsedDate, timeNgu , sleepDurationInMinutes);
+
                 try {
                     firestore.collection(type)
                             .add(nutritionData)
@@ -149,8 +173,7 @@ public class AddSinhHieuDataActivity extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "Save canxi failed", Toast.LENGTH_LONG).show();
                                 }
                             });
-
-                    startActivity(new Intent(getApplicationContext(), ChiTietSinhHieuActivity.class));
+                    startActivity(new Intent(getApplicationContext(), DetailedNutritionActivity.class));
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -174,7 +197,28 @@ public class AddSinhHieuDataActivity extends AppCompatActivity {
 
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                 String formattedDate = dateFormat.format(selectedDate.getTime());
-                tvNgayDatePikcer.setText(formattedDate);
+                tvNgayNguDatePikcer.setText(formattedDate);
+            }
+        }, year, month, day);
+
+        datePickerDialog.show();
+    }
+
+    private void showDateThucPickerDialog() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int selectedYear, int monthOfYear, int dayOfMonth) {
+                Calendar selectedDate = Calendar.getInstance();
+                selectedDate.set(selectedYear, monthOfYear, dayOfMonth);
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                String formattedDate = dateFormat.format(selectedDate.getTime());
+                tvNgayThucDatePikcer.setText(formattedDate);
             }
         }, year, month, day);
 
@@ -190,7 +234,23 @@ public class AddSinhHieuDataActivity extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
                 String selectedTime = String.format("%02d:%02d", selectedHour, selectedMinute);
-                tvGioTimePicker.setText(selectedTime);
+                tvGioNguTimePicker.setText(selectedTime);
+            }
+        }, hour, minute, true);
+
+        timePickerDialog.show();
+    }
+
+    private void showTimeGioThucPickerDialog() {
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
+                String selectedTime = String.format("%02d:%02d", selectedHour, selectedMinute);
+                tvGioThucTimePicker.setText(selectedTime);
             }
         }, hour, minute, true);
 

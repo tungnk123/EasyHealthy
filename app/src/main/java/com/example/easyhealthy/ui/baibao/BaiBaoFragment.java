@@ -32,11 +32,16 @@ public class BaiBaoFragment extends Fragment {
     RecyclerView rcvNguyCo;
     RecyclerView rcvBaiBao;
 
+    RecyclerView rcvBaiKiemTra;
+
     NguyCoAdapter nguyCoAdapter;
     BaiBaoAdapter baiBaoAdapter;
+
+    BaiBaoAdapter baiKiemTraAdapter;
     List<HoatDongData> duyetItems;
 
     DuyetItem[] baiBaoList;
+    DuyetItem[] baiKiemTraList;
 
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
@@ -55,7 +60,7 @@ public class BaiBaoFragment extends Fragment {
     private void addControls() {
         rcvNguyCo = binding.rcvNguyCo;
         rcvBaiBao = binding.rcvBaiBao;
-
+        rcvBaiKiemTra = binding.rcvBaiKiemTra;
         duyetItems = new ArrayList<>();
         duyetItems.add(new HoatDongData("Đường huyết cao", R.drawable.ic_glucose, 200, "mmol/L"));
         duyetItems.add(new HoatDongData("Thiếu nước", R.drawable.ic_water, 1, "L"));
@@ -65,11 +70,15 @@ public class BaiBaoFragment extends Fragment {
                 new DuyetItem("Nấm hương tốt cho người mỡ máu", R.drawable.ic_nam_huong),
         };
 
+
+
+
         nguyCoAdapter = new NguyCoAdapter(duyetItems);
         rcvNguyCo.setAdapter(nguyCoAdapter);
         rcvNguyCo.setLayoutManager(new LinearLayoutManager(getContext()));
 
         baiBaoAdapter = new BaiBaoAdapter(baiBaoList);
+
         baiBaoAdapter.setOnItemClickListener(new BaiBaoAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DuyetItem item) {
@@ -84,6 +93,22 @@ public class BaiBaoFragment extends Fragment {
 
         checkBMI();
 
+        baiKiemTraList = new DuyetItem[] {
+                new DuyetItem("Bài kiểm tra stress", R.drawable.img_stress),
+                new DuyetItem("Bài kiểm tra rối loạn ăn uống", R.drawable.img_roiloananuong),
+                new DuyetItem("Bài kiểm tra độ nghiện", R.drawable.img_nghien),
+        };
+        baiKiemTraAdapter = new BaiBaoAdapter(baiKiemTraList);
+        baiKiemTraAdapter.setOnItemClickListener(new BaiBaoAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DuyetItem item) {
+                Intent intent = new Intent(getContext(), ChiTietBaiBaoActivity.class);
+                intent.putExtra("title", item.getTitle());
+                startActivity(intent);
+            }
+        });
+        rcvBaiKiemTra.setLayoutManager(new LinearLayoutManager(getContext()));
+        rcvBaiKiemTra.setAdapter(baiKiemTraAdapter);
 
     }
 

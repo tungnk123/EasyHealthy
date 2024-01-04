@@ -73,6 +73,7 @@ public class HomeFragment extends Fragment implements SensorEventListener {
             @Override
             public void onItemClick(DuyetItem item) {
                 Intent intent = new Intent(getContext(), ChiTietBaiBaoActivity.class);
+                intent.putExtra("title", item.getTitle());
                 startActivity(intent);
             }
         });
@@ -158,7 +159,7 @@ public class HomeFragment extends Fragment implements SensorEventListener {
     }
 
     public void updateChiSoBuocChan() {
-        binding.tvCaloBuocChan.setText(String.valueOf(stepCount * 0.05));
+        binding.tvCaloBuocChan.setText(String.valueOf((int) (stepCount * 0.05)));
         binding.tvKmBuocChan.setText(String.valueOf((int) (stepCount * 0.0006)));
         binding.tvPhutBuocChan.setText(String.valueOf((int) (stepCount * 0.01)));
     }

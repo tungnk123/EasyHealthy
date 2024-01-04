@@ -38,7 +38,7 @@
     <TextView
         android:id="@+id/tv_itemNumber"
         style="@style/large_text"
-        android:text="5 mg"
+        android:text="5"
         android:layout_width="0dp"
         android:textColor="@android:color/holo_red_light"
         android:layout_height="wrap_content"

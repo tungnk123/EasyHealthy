@@ -1,4 +1,4 @@
-package com.example.easyhealthy.ui.chi_so_co_the;
+package com.example.easyhealthy.ui.giac_ngu;
 
 import static android.content.ContentValues.TAG;
 
@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.easyhealthy.R;
 import com.example.easyhealthy.model.NutritionData;
-import com.example.easyhealthy.ui.hoatdong.AddNewHoatDongActivity;
+import com.example.easyhealthy.ui.luong_nuoc.AddLuongNuocActivity;
 import com.example.easyhealthy.ui.nutrition.AddNutritionDataActivity;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -28,13 +28,11 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class ChiTietChiSoCoTheActivity extends AppCompatActivity {
+public class GiacNguActivity extends AppCompatActivity {
 
     Button btnThemDuLieu;
     Button btnNgay;
@@ -49,13 +47,10 @@ public class ChiTietChiSoCoTheActivity extends AppCompatActivity {
 
     TextView tvGioiThieu;
 
-    TextView tvMota;
-    TextView tvDonViDo;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chi_tiet_chi_so_co_the);
+        setContentView(R.layout.activity_giac_ngu);
         addControls();
         addEvents();
         btnNgay.callOnClick();
@@ -79,7 +74,7 @@ public class ChiTietChiSoCoTheActivity extends AppCompatActivity {
 //        entries.add(new BarEntry(18, 7));
 
         BarDataSet dataSet = new BarDataSet(entries, "Canxi");
-        dataSet.setColors(ColorTemplate.rgb("92A3FD"));
+        dataSet.setColors(ColorTemplate.rgb("71EA66"));
         BarData barData = new BarData(dataSet);
         barChart.setData(barData);
         barChart.setFitBars(true);
@@ -99,35 +94,15 @@ public class ChiTietChiSoCoTheActivity extends AppCompatActivity {
         tvHeading1.setText(intent.getStringExtra("title"));
 
         tvGioiThieu = (TextView) findViewById(R.id.tv_detailedFood_gioiThieu);
-        tvMota = (TextView) findViewById(R.id.tv_moTa);
-        tvDonViDo = (TextView) findViewById(R.id.tv_donViDo);
         tvGioiThieu.setText("Giới thiệu về " + tvHeading1.getText().toString());
-        tvMota.setText(intent.getStringExtra("MO_TA"));
-        tvDonViDo.setText(intent.getStringExtra("DON_VI_DO"));
-
     }
 
     private void addEvents() {
-
-        Toolbar toolbar = findViewById(R.id.tb_chiTietDinhDuong);
-        setSupportActionBar(toolbar);
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("");
-        }
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
         btnThemDuLieu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddNewHoatDongActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ThemGiacNguDataActivity.class);
                 intent.putExtra("title", tvHeading1.getText().toString());
-                intent.putExtra("DON_VI_TINH", tvDonViDo.getText().toString());
-
                 startActivity(intent);
             }
         });
@@ -186,6 +161,19 @@ public class ChiTietChiSoCoTheActivity extends AppCompatActivity {
                 updateDataForChart("nam");
             }
         });
+
+        Toolbar toolbar = findViewById(R.id.tb_chiTietDinhDuong);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("");
+        }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     private void updateDataForChart(String type) {
@@ -218,7 +206,7 @@ public class ChiTietChiSoCoTheActivity extends AppCompatActivity {
                                 NutritionData nutritionData = new NutritionData(documentSnapshot);
                                 entries.add(new BarEntry(Integer.parseInt(nutritionData.getTime().substring(0, 2)), nutritionData.getQuantity()));
                             }
-                            updateChart(entries, xAxis, tvHeading1.getText().toString() + " trong ngày", "ngay");
+                            updateChart(entries, xAxis, "Lưu lượng "+ tvHeading1.getText().toString() + " trong ngày", "ngay");
                         })
                         .addOnFailureListener(e -> Log.e("1", "Error fetching tuan data: " + e.getMessage()));
                 break;
@@ -239,7 +227,7 @@ public class ChiTietChiSoCoTheActivity extends AppCompatActivity {
                                 NutritionData nutritionData = new NutritionData(documentSnapshot);
                                 entries.add(new BarEntry(nutritionData.getDate().getDay(), nutritionData.getQuantity()));
                             }
-                            updateChart(entries, xAxis, tvHeading1.getText().toString() + " trong tuần", "tuan");
+                            updateChart(entries, xAxis, "Lưu lượng "+ tvHeading1.getText().toString() + " trong tuần", "tuan");
                         })
                         .addOnFailureListener(e -> Log.e(TAG, "Error fetching data: " + e.getMessage()));
                 break;
@@ -261,7 +249,7 @@ public class ChiTietChiSoCoTheActivity extends AppCompatActivity {
                                 NutritionData nutritionData = new NutritionData(documentSnapshot);
                                 entries.add(new BarEntry(nutritionData.getDate().getDate(), nutritionData.getQuantity()));
                             }
-                            updateChart(entries, xAxis,  tvHeading1.getText().toString() + " trong tháng", "thang");
+                            updateChart(entries, xAxis, "Lưu lượng "+ tvHeading1.getText().toString() + " trong tháng", "thang");
                         })
                         .addOnFailureListener(e -> Log.e(TAG, "Error fetching thang data: " + e.getMessage()));
                 break;
@@ -285,7 +273,7 @@ public class ChiTietChiSoCoTheActivity extends AppCompatActivity {
                                 NutritionData nutritionData = new NutritionData(documentSnapshot);
                                 entries.add(new BarEntry(nutritionData.getDate().getMonth() + 1, nutritionData.getQuantity()));
                             }
-                            updateChart(entries, xAxis,  tvHeading1.getText().toString() + " trong năm", "nam");
+                            updateChart(entries, xAxis, "Lưu lượng "+ tvHeading1.getText().toString() + " trong năm", "nam");
                         })
                         .addOnFailureListener(e -> Log.e(TAG, "Error fetching nam data: " + e.getMessage()));
                 break;
@@ -294,7 +282,7 @@ public class ChiTietChiSoCoTheActivity extends AppCompatActivity {
 
     private void updateChart(ArrayList<BarEntry> entries, XAxis xAxis, String description, String type) {
         BarDataSet dataSet = new BarDataSet(entries, tvHeading1.getText().toString());
-        dataSet.setColors(ColorTemplate.rgb("92A3FD"));
+        dataSet.setColors(ColorTemplate.rgb("71EA66"));
         BarData barData = new BarData(dataSet);
         barChart.setData(barData);
         barChart.setFitBars(true);

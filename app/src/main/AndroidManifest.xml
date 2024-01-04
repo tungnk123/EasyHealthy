@@ -16,6 +16,12 @@
         android:theme="@style/Theme.EasyHealthy"
         tools:targetApi="31">
         <activity
+            android:name=".ui.giac_ngu.ThemGiacNguDataActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.giac_ngu.GiacNguActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.luong_nuoc.AddLuongNuocActivity"
             android:exported="false" />
         <activity

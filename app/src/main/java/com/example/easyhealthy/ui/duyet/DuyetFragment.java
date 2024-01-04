@@ -19,6 +19,7 @@ import com.example.easyhealthy.databinding.FragmentDuyetBinding;
 import com.example.easyhealthy.model.DuyetItem;
 import com.example.easyhealthy.ui.chi_so_co_the.ChiSoCoTheActivity;
 import com.example.easyhealthy.ui.dinhDuong.DinhDuongActivity;
+import com.example.easyhealthy.ui.giac_ngu.GiacNguActivity;
 import com.example.easyhealthy.ui.hoatdong.HoatDongActivity;
 import com.example.easyhealthy.ui.luong_nuoc.LuongNuocActivity;
 import com.example.easyhealthy.ui.nutrition.DetailedNutritionActivity;
@@ -52,7 +53,6 @@ public class DuyetFragment extends Fragment {
         listAdapter.setOnItemClickListener(new ListWithImageAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DuyetItem item) {
-                Toast.makeText(requireContext(), "Clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
                 if (Objects.equals(item.getTitle(), "Dinh dưỡng")) {
                     Intent intent = new Intent(getContext(), DinhDuongActivity.class);
                     startActivity(intent);
@@ -73,6 +73,11 @@ public class DuyetFragment extends Fragment {
                 else if (Objects.equals(item.getTitle(), "Lượng nước")) {
                     Intent intent = new Intent(getContext(), LuongNuocActivity.class);
                     intent.putExtra("title", "Lượng nước");
+                    startActivity(intent);
+                }
+                else if (Objects.equals(item.getTitle(), "Ngủ")) {
+                    Intent intent = new Intent(getContext(), GiacNguActivity.class);
+                    intent.putExtra("title", "Giấc ngủ");
                     startActivity(intent);
                 }
             }

@@ -42,8 +42,13 @@ public class AddNutritionDataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_nutrition_data);
-        addControls();
-        addEvents();
+        try {
+            addControls();
+            addEvents();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void addControls() {
@@ -89,44 +94,56 @@ public class AddNutritionDataActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String type = tvHeading.getText().toString();
-                String date = tvNgayDatePikcer.getText().toString();
-                String time = tvGioTimePicker.getText().toString();
-                int quantity = Integer.parseInt(edtLuuLuong.getText().toString());
-
-                // Parse the date string into a Date object
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                Date parsedDate = null;
-
                 try {
-                    parsedDate = dateFormat.parse(date);
+                    String type = tvHeading.getText().toString();
+                    String date = tvNgayDatePikcer.getText().toString();
+                    String time = tvGioTimePicker.getText().toString();
+                    int quantity = Integer.parseInt(edtLuuLuong.getText().toString());
+
+                    // Check if type is not empty or null
+                    if (type.isEmpty()) {
+                        throw new IllegalArgumentException("Invalid type");
+                    }
+
+                    // Parse the date string into a Date object
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                    Date parsedDate = dateFormat.parse(date);
+
+                    // Format the date to create the Firestore document ID
+                    NutritionData nutritionData = new NutritionData(type, parsedDate, time, quantity);
+
+                    firestore.collection(type)
+                            .add(nutritionData)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Toast.makeText(getApplicationContext(), "Save canxi successfully", Toast.LENGTH_LONG).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext(), "Save canxi failed", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                    startActivity(new Intent(getApplicationContext(), DetailedNutritionActivity.class));
+                } catch (NumberFormatException e) {
+                    // Handle the case where parsing quantity fails
+                    Toast.makeText(getApplicationContext(), "Invalid quantity format", Toast.LENGTH_LONG).show();
                 } catch (ParseException e) {
+                    // Handle the case where parsing date fails
+                    Toast.makeText(getApplicationContext(), "Invalid date format", Toast.LENGTH_LONG).show();
+                } catch (IllegalArgumentException e) {
+                    // Handle the case where type is empty
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    // Handle other unexpected exceptions
                     e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "An unexpected error occurred", Toast.LENGTH_LONG).show();
                 }
-
-                // Format the date to create the Firestore document ID
-
-
-                NutritionData nutritionData = new NutritionData(type, parsedDate, time, quantity);
-
-                firestore.collection(type)
-                        .add(nutritionData)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(getApplicationContext(), "Save canxi successfully", Toast.LENGTH_LONG).show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getApplicationContext(), "Save canxi failed", Toast.LENGTH_LONG).show();
-                            }
-                        });
-
-                startActivity(new Intent(getApplicationContext(), DetailedNutritionActivity.class));
             }
         });
+
     }
 
     private void showDatePickerDialog() {
