@@ -81,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Tri Le"
+            android:text="Tung"
             android:textAlignment="center"
             android:textSize="20sp"
             style="@style/caption"
@@ -352,7 +352,7 @@
                 style="@style/personal_info_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="30/11"
+                android:text="13/12"
                 app:layout_constraintBottom_toTopOf="@id/marginView6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
