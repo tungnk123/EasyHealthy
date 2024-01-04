@@ -158,7 +158,7 @@ public class HomeFragment extends Fragment implements SensorEventListener {
     }
 
     public void updateChiSoBuocChan() {
-        binding.tvCaloBuocChan.setText(String.valueOf(stepCount * 0.05));
+        binding.tvCaloBuocChan.setText(String.valueOf((int) (stepCount * 0.05)));
         binding.tvKmBuocChan.setText(String.valueOf((int) (stepCount * 0.0006)));
         binding.tvPhutBuocChan.setText(String.valueOf((int) (stepCount * 0.01)));
     }
