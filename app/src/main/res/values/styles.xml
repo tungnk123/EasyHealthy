@@ -62,5 +62,28 @@
         <item name="android:textColor">@color/blue_300</item>
     </style>
 
+    <style name="app_name_1" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="app_name_2" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/blue_300</item>
+    </style>
+
+    <style name="grey_text" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/gray_100</item>
+    </style>
+
+    <style name="pink_purle_medium_bold_text" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gray_100</item>
+    </style>
 
 </resources>
