@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.example.easyhealthy.R;
 import com.example.easyhealthy.databinding.ActivitySignUpBinding;
+import com.example.easyhealthy.model.User;
 
 public class SignUpActivity extends AppCompatActivity {
     private ActivitySignUpBinding binding;
@@ -18,7 +19,13 @@ public class SignUpActivity extends AppCompatActivity {
     setContentView(binding.getRoot());
 
     binding.btnSignup.setOnClickListener(v -> {
+        User user = new User();
+        user.setName(binding.etFullName.getText().toString());
+        user.setEmail(binding.etEmail.getText().toString());
+        user.setPassword(binding.etPassword.getText().toString());
+
         Intent intent = new Intent(SignUpActivity.this, CompleteProfileActivity.class);
+        intent.putExtra("user", user);
         startActivity(intent);
     });
 

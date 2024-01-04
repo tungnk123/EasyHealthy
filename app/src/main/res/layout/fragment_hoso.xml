@@ -129,7 +129,7 @@
                 style="@style/personal_info_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1m70"
+                android:text="170"
                 app:layout_constraintBottom_toTopOf="@id/marginView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -147,8 +147,9 @@
                 android:id="@+id/tv_chieuCao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chiều cao"
+                android:text="Chiều cao\n(cm)"
                 android:textSize="16sp"
+                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/marginView" />
@@ -169,7 +170,7 @@
                 style="@style/personal_info_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="50kg"
+                android:text="50"
                 app:layout_constraintBottom_toTopOf="@id/marginView2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -187,8 +188,9 @@
                 android:id="@+id/tv_canNang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cân nặng"
+                android:text="Cân nặng\n(kg)"
                 android:textSize="16sp"
+                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/marginView2" />

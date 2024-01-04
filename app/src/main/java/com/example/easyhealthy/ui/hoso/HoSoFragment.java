@@ -1,26 +1,36 @@
 package com.example.easyhealthy.ui.hoso;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.easyhealthy.MainActivity;
 import com.example.easyhealthy.databinding.FragmentHosoBinding;
 import com.example.easyhealthy.ui.logIn_signUp.LogInActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.CollectionReference;
 
 public class HoSoFragment extends Fragment {
+    SharedPreferences sharedPreferences;
 
     private FragmentHosoBinding binding;
     FirebaseFirestore db;
@@ -31,15 +41,49 @@ public class HoSoFragment extends Fragment {
         binding = FragmentHosoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        sharedPreferences = requireActivity().getSharedPreferences("data", Context.MODE_PRIVATE);
+        String email = sharedPreferences.getString("email", "lkt@gmail.com");
+
+        // lay thong tin user tu database set vao textview
         db = FirebaseFirestore.getInstance();
-        final CollectionReference users = db.collection("users");
+        db.collection("users")
+                .whereEqualTo("email", email)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        // Lấy thông tin người dùng từ kết quả truy vấn
+                        DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
+
+                        // Lấy dữ liệu từ DocumentSnapshot
+                        String userName = documentSnapshot.getString("name");
+                        int height = documentSnapshot.getLong("height").intValue();
+                        int weight = documentSnapshot.getLong("weight").intValue();
+                        Double bmi = documentSnapshot.getDouble("bmi");
+                        String gender = documentSnapshot.getString("gender");
+                        int age = documentSnapshot.getLong("age").intValue();
+                        String dateOfBirth = documentSnapshot.getString("dateOfBirth");
+
+                        // Đặt dữ liệu vào các TextView
+                        binding.tvTen.setText(userName);
+                        binding.tvChieuCaoIndex.setText(String.valueOf(height));
+                        binding.tvCanNangIndex.setText(String.valueOf(weight));
+                        String bmiFormatted = String.format("%.1f", bmi);
+                        binding.tvBmiIndex.setText(bmiFormatted);
+                        binding.tvGioiTinhValue.setText(gender);
+                        binding.tvTuoiValue.setText(String.valueOf(age));
+                        binding.tvNgaySinhValue.setText(dateOfBirth);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(requireContext(), "Lỗi khi lấy dữ liệu", Toast.LENGTH_SHORT).show();
+                });
 
         // hien thi dialog chinh sua ten khi click vao nut chinh sua
         binding.ibtnChinhSua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // hien thi dialog nhap ten moi
-                hienThiDialogDoiTen(users);
+                hienThiDialogDoiTen();
             }
         });
 
@@ -50,8 +94,6 @@ public class HoSoFragment extends Fragment {
                 hienThiDialogDangXuat();
             }
         });
-
-
 
         return root;
     }
@@ -79,7 +121,7 @@ public class HoSoFragment extends Fragment {
         builder.show();
     }
 
-    private void hienThiDialogDoiTen(CollectionReference users) {
+    private void hienThiDialogDoiTen() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Nhập tên mới");
 
@@ -94,7 +136,7 @@ public class HoSoFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 String tenMoi = input.getText().toString();
                 // Xử lý tên mới ở đây (ví dụ: cập nhật tên trên giao diện)
-                capNhatTenMoi(tenMoi, users);
+                capNhatTenMoi(tenMoi);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -108,13 +150,27 @@ public class HoSoFragment extends Fragment {
         builder.show();
     }
 
-    // Phương thức để cập nhật tên mới (ví dụ)
-    private void capNhatTenMoi(String tenMoi, CollectionReference users) {
+    // cập nhật tên mới
+    private void capNhatTenMoi(String tenMoi) {
         TextView tvTen = binding.tvTen;
         tvTen.setText(tenMoi);
 
-        // Cập nhật tên mới lên database
+        DocumentReference userRef = db.collection("users").document(sharedPreferences.getString("email", ""));
 
+        userRef
+                .update("name", tenMoi)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(requireContext(), "Cập nhật tên thành công", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(requireContext(), "Cập nhật tên thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
 

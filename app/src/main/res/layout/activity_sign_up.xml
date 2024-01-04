@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <EditText
-            android:id="@+id/et_last_name"
+            android:id="@+id/et_full_name"
             style="@style/grey_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,20 +53,7 @@
             android:drawableLeft="@drawable/ic_account_circle_24"
             android:drawablePadding="15dp"
             android:ems="10"
-            android:hint="Họ"
-            android:padding="20dp" />
-
-        <EditText
-            android:id="@+id/et_first_name"
-            style="@style/grey_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/background_rounded_gray"
-            android:drawableLeft="@drawable/ic_account_circle_24"
-            android:drawablePadding="15dp"
-            android:ems="10"
-            android:hint="Tên"
+            android:hint="Họ và tên"
             android:padding="20dp" />
 
         <EditText
