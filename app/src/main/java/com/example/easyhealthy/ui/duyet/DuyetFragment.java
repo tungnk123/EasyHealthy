@@ -20,6 +20,8 @@ import com.example.easyhealthy.model.DuyetItem;
 import com.example.easyhealthy.ui.chi_so_co_the.ChiSoCoTheActivity;
 import com.example.easyhealthy.ui.dinhDuong.DinhDuongActivity;
 import com.example.easyhealthy.ui.hoatdong.HoatDongActivity;
+import com.example.easyhealthy.ui.luong_nuoc.LuongNuocActivity;
+import com.example.easyhealthy.ui.nutrition.DetailedNutritionActivity;
 import com.example.easyhealthy.ui.sinh_hieu.SinhHieuActivity;
 
 import java.util.Objects;
@@ -42,7 +44,6 @@ public class DuyetFragment extends Fragment {
                 new DuyetItem("Lượng nước", R.drawable.ic_water),
                 new DuyetItem("Sinh hiệu", R.drawable.ic_sinhhieu),
                 new DuyetItem("Ngủ", R.drawable.ic_bed),
-                new DuyetItem("Triệu chứng", R.drawable.ic_trieuchung),
                 new DuyetItem("Hoạt động", R.drawable.ic_fire),
                 new DuyetItem("Số đo cơ thể", R.drawable.ic_body),
 
@@ -67,6 +68,11 @@ public class DuyetFragment extends Fragment {
                 // TODO: Ae nao lam man hinh nao thi them o day
                 else if (Objects.equals(item.getTitle(), "Số đo cơ thể")) {
                     Intent intent = new Intent(getContext(), ChiSoCoTheActivity.class);
+                    startActivity(intent);
+                }
+                else if (Objects.equals(item.getTitle(), "Lượng nước")) {
+                    Intent intent = new Intent(getContext(), LuongNuocActivity.class);
+                    intent.putExtra("title", "Lượng nước");
                     startActivity(intent);
                 }
             }
