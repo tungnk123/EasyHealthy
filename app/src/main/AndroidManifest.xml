@@ -16,6 +16,12 @@
         android:theme="@style/Theme.EasyHealthy"
         tools:targetApi="31">
         <activity
+            android:name=".ui.logIn_signUp.CompleteProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.logIn_signUp.SignUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.logIn_signUp.StartUpActivity"
             android:exported="true"
             android:label="@string/app_name">
@@ -23,9 +29,11 @@
             <!-- Thêm intent-filter mới cho activity này -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>        <activity
+        </activity>
+        <activity
             android:name=".ui.logIn_signUp.LogInActivity"
             android:exported="false" />
         <activity

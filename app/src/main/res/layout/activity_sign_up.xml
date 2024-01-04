@@ -28,7 +28,7 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bạn đã trở lại"
+            android:text="Hãy điền thông tin"
             android:layout_marginTop="10dp"
             style="@style/app_name_1"/>
     </LinearLayout>
@@ -45,10 +45,36 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/et_last_name"
             style="@style/grey_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/background_rounded_gray"
+            android:drawableLeft="@drawable/ic_account_circle_24"
+            android:drawablePadding="15dp"
+            android:ems="10"
+            android:hint="Họ"
+            android:padding="20dp" />
+
+        <EditText
+            android:id="@+id/et_first_name"
+            style="@style/grey_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/background_rounded_gray"
+            android:drawableLeft="@drawable/ic_account_circle_24"
+            android:drawablePadding="15dp"
+            android:ems="10"
+            android:hint="Tên"
+            android:padding="20dp" />
+
+        <EditText
+            android:id="@+id/et_email"
+            style="@style/grey_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:background="@drawable/background_rounded_gray"
             android:drawableLeft="@drawable/ic_mail"
             android:drawablePadding="15dp"
@@ -69,7 +95,6 @@
             android:hint="Mật khẩu"
             android:inputType="textPassword"
             android:padding="20dp" />
-
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -82,17 +107,16 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_signup"
             style="@style/heading2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:background="@drawable/button_gradient_rounded_login"
-            android:drawableLeft="@drawable/baseline_login_24"
             android:gravity="center_vertical|center_horizontal"
             android:paddingHorizontal="100dp"
             android:paddingVertical="10dp"
-            android:text="Đăng nhập"
+            android:text="Đăng ký"
             android:textColor="@color/white"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -104,21 +128,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="30dp"
-            android:text="Bạn chưa có tài khoản?"
+            android:text="Bạn đã có tài khoản?"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tv_signup"
+            app:layout_constraintEnd_toStartOf="@+id/tv_login"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_login"
+            app:layout_constraintTop_toBottomOf="@+id/btn_signup"
             style="@style/medium_text"/>
 
         <TextView
-            android:id="@+id/tv_signup"
+            android:id="@+id/tv_login"
             style="@style/pink_purle_medium_bold_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:text="Đăng ký"
+            android:text="Đăng nhập"
             android:textColor="@color/pink_purple"
             app:layout_constraintBottom_toBottomOf="@+id/textView7"
             app:layout_constraintEnd_toEndOf="parent"
