@@ -113,7 +113,6 @@ public class DetailedNutritionActivity extends AppCompatActivity {
                 btnTuan.setBackground(drawableNotSelected);
                 btnThang.setBackground(drawableNotSelected);
                 btnNam.setBackground(drawableNotSelected);
-                Toast.makeText(getApplicationContext(), "button ngay click", Toast.LENGTH_LONG).show();
                 updateUI("ngay");
                 updateDataForChart("ngay");
             }
@@ -128,7 +127,6 @@ public class DetailedNutritionActivity extends AppCompatActivity {
                 btnNgay.setBackground(drawableNotSelected);
                 btnThang.setBackground(drawableNotSelected);
                 btnNam.setBackground(drawableNotSelected);
-                Toast.makeText(getApplicationContext(), "button tuan click", Toast.LENGTH_LONG).show();
                 updateUI("tuan");
                 updateDataForChart("tuan");
             }
@@ -143,7 +141,6 @@ public class DetailedNutritionActivity extends AppCompatActivity {
                 btnNgay.setBackground(drawableNotSelected);
                 btnTuan.setBackground(drawableNotSelected);
                 btnNam.setBackground(drawableNotSelected);
-                Toast.makeText(getApplicationContext(), "button thang click", Toast.LENGTH_LONG).show();
                 updateUI("thang");
                 updateDataForChart("thang");
             }
@@ -158,7 +155,6 @@ public class DetailedNutritionActivity extends AppCompatActivity {
                 btnNgay.setBackground(drawableNotSelected);
                 btnThang.setBackground(drawableNotSelected);
                 btnTuan.setBackground(drawableNotSelected);
-                Toast.makeText(getApplicationContext(), "button nam click", Toast.LENGTH_LONG).show();
                 updateUI("nam");
                 updateDataForChart("nam");
             }

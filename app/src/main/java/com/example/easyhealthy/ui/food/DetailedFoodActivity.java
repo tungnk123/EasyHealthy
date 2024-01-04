@@ -165,7 +165,6 @@ public class DetailedFoodActivity extends AppCompatActivity {
                 btnTuan.setBackground(drawableNotSelected);
                 btnThang.setBackground(drawableNotSelected);
                 btnNam.setBackground(drawableNotSelected);
-                Toast.makeText(getApplicationContext(), "button ngay click", Toast.LENGTH_LONG).show();
                 updateUI("ngay");
                 updateDataForChart("ngay");
             }
@@ -180,7 +179,6 @@ public class DetailedFoodActivity extends AppCompatActivity {
                 btnNgay.setBackground(drawableNotSelected);
                 btnThang.setBackground(drawableNotSelected);
                 btnNam.setBackground(drawableNotSelected);
-                Toast.makeText(getApplicationContext(), "button tuan click", Toast.LENGTH_LONG).show();
                 updateUI("tuan");
                 updateDataForChart("tuan");
             }
@@ -195,7 +193,6 @@ public class DetailedFoodActivity extends AppCompatActivity {
                 btnNgay.setBackground(drawableNotSelected);
                 btnTuan.setBackground(drawableNotSelected);
                 btnNam.setBackground(drawableNotSelected);
-                Toast.makeText(getApplicationContext(), "button thang click", Toast.LENGTH_LONG).show();
                 updateUI("thang");
                 updateDataForChart("thang");
             }
@@ -210,7 +207,6 @@ public class DetailedFoodActivity extends AppCompatActivity {
                 btnNgay.setBackground(drawableNotSelected);
                 btnThang.setBackground(drawableNotSelected);
                 btnTuan.setBackground(drawableNotSelected);
-                Toast.makeText(getApplicationContext(), "button nam click", Toast.LENGTH_LONG).show();
                 updateUI("nam");
                 updateDataForChart("nam");
             }
@@ -247,7 +243,7 @@ public class DetailedFoodActivity extends AppCompatActivity {
                                 entries.add(new BarEntry(Integer.parseInt(nutritionData.getTime().substring(0, 2)), nutritionData.getQuantity()));
                                 Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
                             }
-                            updateChart(entries, xAxis, "Lưu lượng "+ tvHeading1.getText().toString() + " trong ngày", "ngay");
+                            updateChart(entries, xAxis, "Số lượng "+ tvHeading1.getText().toString() + " trong ngày", "ngay");
                         })
                         .addOnFailureListener(e -> Log.e("1", "Error fetching tuan data: " + e.getMessage()));
                 break;
@@ -269,7 +265,7 @@ public class DetailedFoodActivity extends AppCompatActivity {
                                 entries.add(new BarEntry(nutritionData.getDate().getDay(), nutritionData.getQuantity()));
                                 Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
                             }
-                            updateChart(entries, xAxis, "Lưu lượng "+ tvHeading1.getText().toString() + " trong tuần", "tuan");
+                            updateChart(entries, xAxis, "Số lượng "+ tvHeading1.getText().toString() + " trong tuần", "tuan");
                         })
                         .addOnFailureListener(e -> Log.e(TAG, "Error fetching data: " + e.getMessage()));
                 break;
@@ -292,7 +288,7 @@ public class DetailedFoodActivity extends AppCompatActivity {
                                 entries.add(new BarEntry(nutritionData.getDate().getDate(), nutritionData.getQuantity()));
                                 Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
                             }
-                            updateChart(entries, xAxis, "Lưu lượng "+ tvHeading1.getText().toString() + " trong tháng", "thang");
+                            updateChart(entries, xAxis, "Số lượng "+ tvHeading1.getText().toString() + " trong tháng", "thang");
                         })
                         .addOnFailureListener(e -> Log.e(TAG, "Error fetching thang data: " + e.getMessage()));
                 break;
@@ -317,7 +313,7 @@ public class DetailedFoodActivity extends AppCompatActivity {
                                 entries.add(new BarEntry(nutritionData.getDate().getMonth() + 1, nutritionData.getQuantity()));
                                 Toast.makeText(getApplicationContext(), "quantity:" + nutritionData.getQuantity(), Toast.LENGTH_LONG).show();
                             }
-                            updateChart(entries, xAxis, "Lưu lượng "+ tvHeading1.getText().toString() + " trong năm", "nam");
+                            updateChart(entries, xAxis, "Số lượng "+ tvHeading1.getText().toString() + " trong năm", "nam");
                         })
                         .addOnFailureListener(e -> Log.e(TAG, "Error fetching nam data: " + e.getMessage()));
                 break;
