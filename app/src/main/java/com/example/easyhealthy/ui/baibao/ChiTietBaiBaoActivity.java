@@ -38,6 +38,16 @@ public class ChiTietBaiBaoActivity extends AppCompatActivity {
             case "Nấm hương tốt cho người mỡ máu":
                 webView.loadUrl("https://thanhnien.vn/giam-mo-trong-mau-nho-nam-huong-185328663.htm");
                 break;
+            case "Bài kiểm tra stress":
+                webView.loadUrl("https://bacsitamly.vn/test-tam-ly/test-tram-cam/");
+                break;
+            case "Bài kiểm tra rối loạn ăn uống":
+                webView.loadUrl("https://bacsitamly.vn/test-tam-ly/test-roi-loan-an-uong-anorexia-bulimia-nervosa/");
+                break;
+            case "Bài kiểm tra độ nghiện":
+                webView.loadUrl("https://bacsitamly.vn/test-tam-ly/test-do-nghien/");
+                break;
+
             default:
                 webView.loadUrl("https://tamanhhospital.vn/mau-nhiem-mo-co-nguy-hiem-khong/");
                 break;
