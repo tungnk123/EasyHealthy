@@ -73,6 +73,7 @@ public class HomeFragment extends Fragment implements SensorEventListener {
             @Override
             public void onItemClick(DuyetItem item) {
                 Intent intent = new Intent(getContext(), ChiTietBaiBaoActivity.class);
+                intent.putExtra("title", item.getTitle());
                 startActivity(intent);
             }
         });

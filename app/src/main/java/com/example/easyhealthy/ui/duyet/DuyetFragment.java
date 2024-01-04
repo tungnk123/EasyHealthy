@@ -53,7 +53,6 @@ public class DuyetFragment extends Fragment {
         listAdapter.setOnItemClickListener(new ListWithImageAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DuyetItem item) {
-                Toast.makeText(requireContext(), "Clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
                 if (Objects.equals(item.getTitle(), "Dinh dưỡng")) {
                     Intent intent = new Intent(getContext(), DinhDuongActivity.class);
                     startActivity(intent);

@@ -42,8 +42,9 @@ public class HoatDongAdapter extends RecyclerView.Adapter<HoatDongAdapter.ListIt
     public void onBindViewHolder(@NonNull ListItemHolder holder, int position) {
         holder.tvTitle.setText(localDataSet.get(position).getTitle());
         holder.imageView.setImageResource(localDataSet.get(position).getIcon());
-        String numberData = localDataSet.get(position).getNumber() + " " + localDataSet.get(position).getDonViDo();
-        holder.tvNumber.setText(numberData);
+        int numberData = localDataSet.get(position).getNumber();
+        holder.tvNumber.setText(String.valueOf(numberData));
+        holder.tvDonViDo.setText(localDataSet.get(position).getDonViDo());
         holder.itemView.setOnClickListener(v -> {
             if (mListener != null) {
                 mListener.onItemClick(localDataSet.get(position));
@@ -60,12 +61,15 @@ public class HoatDongAdapter extends RecyclerView.Adapter<HoatDongAdapter.ListIt
         private final TextView tvTitle;
         private final TextView tvNumber;
         private final ImageView imageView;
+
+        private final TextView tvDonViDo;
         public ListItemHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
             imageView = (ImageView) view.findViewById(R.id.img_startIcon);
             tvTitle = (TextView) view.findViewById(R.id.tv_itemTitle);
             tvNumber = (TextView) view.findViewById(R.id.tv_itemNumber);
+            tvDonViDo = view.findViewById(R.id.tv_itemDonViDo);
         }
 
     }
