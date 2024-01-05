@@ -177,7 +177,7 @@ public class ChiSoCoTheActivity extends AppCompatActivity {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                         HoatDongData data = new  HoatDongData(document);
-                        hoatDongHistoryList.set(0, new HoatDongData("Chiều cao", R.drawable.ic_height, data.getNumber(), "Kg"));
+                        hoatDongHistoryList.set(0, new HoatDongData("Chiều cao", R.drawable.ic_height, data.getNumber(), "cm"));
                         hoatDongAdapter.notifyDataSetChanged();
                     }
                 })
