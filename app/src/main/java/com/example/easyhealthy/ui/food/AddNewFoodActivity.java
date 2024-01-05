@@ -77,7 +77,7 @@ public class AddNewFoodActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    Intent intentBack = new Intent(getApplicationContext(), DinhDuongActivity.class);
+                    Intent intentBack = new Intent(AddNewFoodActivity.this, DinhDuongActivity.class);
                     intentBack.putExtra("TEN_THUC_AN", binding.edtTenSinhHieu.getText().toString());
                     intentBack.putExtra("MO_TA", binding.edtMoTa.getText().toString());
                     intentBack.putExtra("TEN_DON_VI", binding.edtTenDonViDo.getText().toString());

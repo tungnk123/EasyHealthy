@@ -117,16 +117,18 @@ public class AddNutritionDataActivity extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
-                                    Toast.makeText(getApplicationContext(), "Save canxi successfully", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "Save successfully", Toast.LENGTH_LONG).show();
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(getApplicationContext(), "Save canxi failed", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "Save failed", Toast.LENGTH_LONG).show();
                                 }
                             });
-                    startActivity(new Intent(getApplicationContext(), DetailedNutritionActivity.class));
+                    Intent intent = new Intent(AddNutritionDataActivity.this, DetailedNutritionActivity.class);
+                    intent.putExtra("title", tvHeading.getText().toString());
+                    startActivity(intent);
                 } catch (NumberFormatException e) {
                     // Handle the case where parsing quantity fails
                     Toast.makeText(getApplicationContext(), "Invalid quantity format", Toast.LENGTH_LONG).show();

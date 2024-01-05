@@ -215,7 +215,9 @@ public class DetailedFoodActivity extends AppCompatActivity {
     private void updateDataForChart(String type) {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         String collectionPath = tvHeading1.getText().toString();
-
+        if (collectionPath.isEmpty()) {
+            return;
+        }
         CollectionReference collectionReference = firestore.collection(collectionPath);
         ArrayList<BarEntry> entries = new ArrayList<>();
         BarDataSet dataSet = new BarDataSet(entries, tvHeading1.getText().toString());

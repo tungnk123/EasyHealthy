@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.easyhealthy.R;
 import com.example.easyhealthy.model.NutritionData;
+import com.example.easyhealthy.ui.luong_nuoc.AddLuongNuocActivity;
 import com.example.easyhealthy.ui.nutrition.DetailedNutritionActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -141,7 +142,7 @@ public class AddNewHoatDongActivity extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
-                                    Toast.makeText(getApplicationContext(), "Save canxi successfully", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "Save successfully", Toast.LENGTH_LONG).show();
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -150,7 +151,9 @@ public class AddNewHoatDongActivity extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "Save canxi failed", Toast.LENGTH_LONG).show();
                                 }
                             });
-                    startActivity(new Intent(getApplicationContext(), DetailedNutritionActivity.class));
+                    Intent intent = new Intent(AddNewHoatDongActivity.this, ChiTietHoatDongActivity.class);
+                    intent.putExtra("title", tvHeading.getText().toString());
+                    startActivity(intent);
                 }
                 catch (Exception e){
                     e.printStackTrace();
